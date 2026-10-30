@@ -13,8 +13,16 @@
 </head>
 
 <body>
-  <header>
+  <header id="site-header">
     <a class="logo" href="#inicio" style="text-decoration: none;"><span>♡</span> DoaUbiratã</a>
+    <div class="barra-pesquisa-logado" id="header-search" hidden>
+      <input id="search" type="search" placeholder="Pesquisar item, categoria ou descrição" aria-label="Pesquisar doações e pedidos">
+      <button type="button" data-action="search" aria-label="Pesquisar">⌕</button>
+    </div>
+    <div id="nav-auth" class="acoes-header">
+      <button class="btn-secundario" data-action="login">Entrar</button>
+      <button class="btn-principal" data-action="register">Inscrever-se</button>
+    </div>
   </header>
   <main>
     <section id="inicio" class="hero">
@@ -64,9 +72,6 @@
           class="btn-secundario" data-action="request">＋ Fazer pedido</button><button class="btn-secundario"
           data-action="mine">Minhas publicações</button><button class="btn-secundario" data-action="settings">Minha
           conta</button><button class="btn-login" data-action="logout">Sair</button></div>
-      <div class="barra-pesquisa"><input id="search" type="search"
-          placeholder="Pesquisar item, categoria ou descrição"><button class="btn-principal"
-          data-action="search">Pesquisar</button></div>
       <section class="secao-publicacoes">
         <h2>💚 Doações disponíveis</h2>
         <div id="doacoes-lista" class="grade-publicacoes"></div>
