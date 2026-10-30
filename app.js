@@ -43,6 +43,10 @@
       if (!user) return;
 
       show('area');
+      $('header-search').hidden = false;
+      $('site-header').classList.add('header-logado');
+      const nav = $('nav-auth');
+      if (nav) nav.innerHTML = `<span class="saudacao-header">Olá, ${escapeHtml(user.email)}</span><button class="btn-login" data-action="logout">Sair</button>`;
 
       const { data, error } = await sb
         .from('usuarios')
@@ -68,6 +72,8 @@
       profile = null;
 
       show('');
+      $('header-search').hidden = true;
+      $('site-header').classList.remove('header-logado');
 
       const nav = $('nav-auth');
       if (nav) {
