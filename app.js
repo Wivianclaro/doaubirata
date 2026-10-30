@@ -9,29 +9,63 @@
     async function init() {
         if (!window.supabase || !window.SUPABASE_URL || window.SUPABASE_URL.startsWith('COLE_')) { status('Configure a URL e a chave pública do Supabase em supabase-config.js para ativar o site.', true); return }
         sb = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-        const { data: { session } } = await sb.auth.getSession();user = session?.user || null; if (user) await loadUser(); sb.auth.onAuthStateChange(async (_event, session) => {user = session?.user || null; if (user) await loadUser(); else resetAuth(); });
-    }
-
-    async function loadUser() { 
-        $('inicio').hidden = true; 
-        show('area');
-        const { data, error } = await sb
-            .from('usuarios')
-            .select('*')
-            .eq('id', user.id)
-            .maybeSingle();
-        if (error) {
-            status('Não foi possível carregar seu perfil: ' + error.message, true);
-            return;
+        const { data: { session } } = await sb.auth.getSession();
+        user = session?.user || null;
+        if (user) {
+          await loadUser();
+        } else {
+          resetAuth();
         }
-        profile = data;
-        $('boas-vindas').textContent =
-            `Olá, ${profile?.nome || 'bem-vindo(a)'}!`;
-        await loadFeed();
+
+        sb.auth.onAuthStateChange((_event, session) => {
+          user = session?.user || null;
+          if (user) {
+            loadUser();
+          } else {
+            resetAuth();
+          }
+        });
+
+    async function loadUser() {
+      if (!user) return;
+
+      $('inicio').hidden = true;
+      show('area');
+
+      const { data, error } = await sb
+        .from('usuarios')
+        .select('*')
+        .eq('id', user.id)
+        .maybeSingle();
+
+      if (error) {
+        status('Erro ao carregar perfil: ' + error.message, true);
+        return;
+      }
+
+      profile = data;
+
+      $('boas-vindas').textContent =
+        `Olá, ${profile?.nome || user.email}!`;
+
+      await loadFeed();
     }
     
     function resetAuth() {
-        profile = null;show('');$('inicio').hidden = false;
+      user = null;
+      profile = null;
+
+      show('');
+      $('area').hidden = true;
+      $('inicio').hidden = false;
+
+      const nav = $('nav-auth');
+      if (nav) {
+        nav.innerHTML = `
+          <button class="btn-secundario" data-action="login">Entrar</button>
+          <button class="btn-principal" data-action="register">Inscrever-se</button>
+        `;
+      }
     }
     async function loadFeed(term = '') {
         const pattern = term.trim();
