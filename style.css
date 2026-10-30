@@ -4003,3 +4003,11 @@ body.pagina-sucesso-doacao {
         justify-content: center
     }
 }
+/* Pesquisa no cabeçalho da área autenticada */
+#site-header .barra-pesquisa-logado[hidden] { display: none !important; }
+#site-header .saudacao-header { color: #44534c; font-size: 14px; white-space: nowrap; }
+@media (max-width: 600px) {
+  #site-header.header-logado { height: auto; min-height: 75px; flex-wrap: wrap; }
+  #site-header.header-logado .barra-pesquisa-logado { order: 3; flex: 1 1 100%; max-width: 100%; margin: 0; }
+  #site-header.header-logado .acoes-header { margin-left: auto; }
+}
