@@ -9,8 +9,7 @@
     async function init() {
         if (!window.supabase || !window.SUPABASE_URL || window.SUPABASE_URL.startsWith('COLE_')) { status('Configure a URL e a chave pública do Supabase em supabase-config.js para ativar o site.', true); return }
         sb = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-        const { data: { session } } = await sb.auth.getSession(); if (session) await loadUser();
-        sb.auth.onAuthStateChange(async (_event, session) => { user = session?.user || null; if (user) await loadUser(); else resetAuth() });
+        const { data: { session } } = await sb.auth.getSession();user = session?.user || null; if (user) await loadUser(); sb.auth.onAuthStateChange(async (_event, session) => {user = session?.user || null; if (user) await loadUser(); else resetAuth(); });
     }
     async function loadUser() {
         const { data, error } = await sb.from('usuarios').select('*').eq('id', user.id).maybeSingle();
