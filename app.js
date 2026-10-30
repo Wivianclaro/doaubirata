@@ -3,7 +3,19 @@
     let sb, user = null, profile = null, formType = 'doacao', editing = null;
     const status = (msg, error = false) => { $('app-status').innerHTML = `<div class="aviso ${error ? 'erro' : ''}">${escapeHtml(msg)}</div>`; setTimeout(() => { $('app-status').innerHTML = '' }, 6500) };
     const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    const show = id => { ['area', 'form-area', 'mine-area', 'settings-area'].forEach(x => { $(x).hidden = x !== id); }); $('inicio').hidden = id !== ''; };
+    const show = id => {
+        ['area', 'form-area', 'mine-area', 'settings-area'].forEach(x => {
+            const el = $(x);
+            if (el) el.hidden = x !== id;
+        });
+
+        // A página pública só aparece quando não há uma tela de usuário ativa.
+        const publicVisible = id === '';
+        ['inicio', 'como-funciona'].forEach(x => {
+            const el = $(x);
+            if (el) el.hidden = !publicVisible;
+        });
+    };
     const modal = (panel = 'login-panel') => { ['login-panel', 'register-panel', 'forgot-panel'].forEach(x => $(x).hidden = x !== panel); $('auth-modal').classList.add('ativo') };
     const closeModal = () => $('auth-modal').classList.remove('ativo');
     async function init() {
@@ -25,11 +37,11 @@
             resetAuth();
           }
         });
+    }
 
     async function loadUser() {
       if (!user) return;
 
-      $('inicio').hidden = true;
       show('area');
 
       const { data, error } = await sb
@@ -56,8 +68,6 @@
       profile = null;
 
       show('');
-      $('area').hidden = true;
-      $('inicio').hidden = false;
 
       const nav = $('nav-auth');
       if (nav) {
