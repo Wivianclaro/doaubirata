@@ -11,12 +11,23 @@
         sb = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
         const { data: { session } } = await sb.auth.getSession();user = session?.user || null; if (user) await loadUser(); sb.auth.onAuthStateChange(async (_event, session) => {user = session?.user || null; if (user) await loadUser(); else resetAuth(); });
     }
-    async function loadUser() {
-        const { data, error } = await sb.from('usuarios').select('*').eq('id', user.id).maybeSingle();
-        if (error) { status('Não foi possível carregar seu perfil: ' + error.message, true); return }
+
+    async function loadUser() { 
+        $('inicio').hidden = true; 
+        show('area');
+        const { data, error } = await sb
+            .from('usuarios')
+            .select('*')
+            .eq('id', user.id)
+            .maybeSingle();
+        if (error) {
+            status('Não foi possível carregar seu perfil: ' + error.message, true);
+            return;
+        }
         profile = data;
-        $('boas-vindas').textContent = `Olá, ${profile?.nome || 'bem-vindo(a)'}!`;
-        $('inicio').hidden = true; show('area'); await loadFeed();
+        $('boas-vindas').textContent =
+            `Olá, ${profile?.nome || 'bem-vindo(a)'}!`;
+        await loadFeed();
     }
     
     function resetAuth() {
