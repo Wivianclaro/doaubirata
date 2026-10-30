@@ -16,11 +16,13 @@
         const { data, error } = await sb.from('usuarios').select('*').eq('id', user.id).maybeSingle();
         if (error) { status('Não foi possível carregar seu perfil: ' + error.message, true); return }
         profile = data;
-        $('nav-auth').innerHTML = `<span>Olá, ${escapeHtml(profile?.nome || user.email)}</span>`;
         $('boas-vindas').textContent = `Olá, ${profile?.nome || 'bem-vindo(a)'}!`;
         $('inicio').hidden = true; show('area'); await loadFeed();
     }
-    function resetAuth() { profile = null; $('nav-auth').innerHTML = '<button class="btn-secundario" data-action="login">Entrar</button><button class="btn-principal" data-action="register">Inscrever-se</button>'; show(''); $('inicio').hidden = false }
+    
+    function resetAuth() {
+        profile = null;show('');$('inicio').hidden = false;
+    }
     async function loadFeed(term = '') {
         const pattern = term.trim();
         let q1 = sb.from('doacoes').select('id,usuario_id,item,categoria,descricao,foto,status,created_at,usuarios(nome)').eq('status', 'disponivel').order('created_at', { ascending: false });
