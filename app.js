@@ -3,7 +3,7 @@
     let sb, user = null, profile = null, formType = 'doacao', editing = null;
     const status = (msg, error = false) => { $('app-status').innerHTML = `<div class="aviso ${error ? 'erro' : ''}">${escapeHtml(msg)}</div>`; setTimeout(() => { $('app-status').innerHTML = '' }, 6500) };
     const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    const show = id => { ['area', 'form-area', 'mine-area', 'settings-area'].forEach(x => $(x).hidden = x !== id); if (id === 'area') $('inicio').hidden = false; else $('inicio').hidden = true; };
+    const show = id => { ['area', 'form-area', 'mine-area', 'settings-area'].forEach(x => { $(x).hidden = x !== id); }); $('inicio').hidden = id !== ''; };
     const modal = (panel = 'login-panel') => { ['login-panel', 'register-panel', 'forgot-panel'].forEach(x => $(x).hidden = x !== panel); $('auth-modal').classList.add('ativo') };
     const closeModal = () => $('auth-modal').classList.remove('ativo');
     async function init() {
