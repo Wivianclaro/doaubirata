@@ -121,16 +121,12 @@
         $('header-search').hidden = false;
         $('site-header').classList.add('header-logado');
 
-        // Cabeçalho preservado: saudação e botão Sair.
         const nav = $('nav-auth');
 
         if (nav) {
-            nav.innerHTML = `
-                <span class="saudacao-header">
-                    Olá, ${escapeHtml(user.email)}
-                </span>
-                <button class="btn-login" data-action="logout">Sair</button>
-            `;
+            nav.innerHTML = 
+                <button class="btn-secundario" data-action="settings">Configurações</button>
+                <button class="btn-login" data-action="logout">Sair</button>;
         }
 
         const { data, error } = await sb
