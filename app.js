@@ -122,11 +122,10 @@
         $('site-header').classList.add('header-logado');
 
         const nav = $('nav-auth');
-
         if (nav) {
-            nav.innerHTML = 
-                <button class="btn-secundario" data-action="settings">Configurações</button>
-                <button class="btn-login" data-action="logout">Sair</button>;
+        nav.innerHTML =         <button class="btn-secundario" data-action="settings">Configurações</button>
+                 <button class="btn-login" data-action="logout">Sair</button>
+           ;
         }
 
         const { data, error } = await sb
