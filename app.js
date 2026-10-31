@@ -43,19 +43,28 @@
                 id !== 'settings-area';
         }
 
-        const settings =
-            $('nav-auth')?.querySelector('[data-action="settings"]');
+        const nav = $('nav-auth');
+        if (nav) {
+            const estaEmConfiguracoes = id === 'settings-area';
+            nav.innerHTML = estaEmConfiguracoes
+                ? `
+                    <button class="btn-secundario" data-action="back">← Voltar</button>
+                    <button class="btn-login" data-action="logout">Sair</button>
+                `
+                : `
+                    <button class="btn-secundario" data-action="settings">Configurações</button>
+                    <button class="btn-login" data-action="logout">Sair</button>
+                `;
 
-        const logout =
-            $('nav-auth')?.querySelector('[data-action="logout"]');
+            const esconderBotoes =
+                id === 'mine-area' || id === 'form-area';
 
-        const esconderBotoes =
-            id === 'mine-area' ||
-            id === 'form-area' ||
-            id === 'settings-area';
-
-        if (settings) settings.hidden = esconderBotoes;
-        if (logout) logout.hidden = esconderBotoes;
+            if (esconderBotoes) {
+                nav.querySelectorAll('button').forEach(botao => {
+                    botao.hidden = true;
+                });
+            }
+        }
 
         const pesquisa = $('header-search');
 
@@ -123,10 +132,18 @@
 
         const nav = $('nav-auth');
         if (nav) {
-            nav.innerHTML = `
-               <button class="btn-secundario" data-action="settings">Configurações</button>
-               <button class="btn-login" data-action="logout">Sair</button>
-            `;
+            const estaEmConfiguracoes = $('settings-panel') &&
+                !$('settings-panel').hidden;
+
+            nav.innerHTML = estaEmConfiguracoes
+                ? `
+                    <button class="btn-secundario" data-action="back">← Voltar</button>
+                    <button class="btn-login" data-action="logout">Sair</button>
+                `
+                : `
+                    <button class="btn-secundario" data-action="settings">Configurações</button>
+                    <button class="btn-login" data-action="logout">Sair</button>
+                `;
         }
 
         const { data, error } = await sb
@@ -580,6 +597,11 @@
 
         if (act === 'settings') {
             await showSettings();
+        }
+
+            if (act === 'back') {
+            show('area');
+            await loadFeed();
         }
 
         if (act === 'delete-account') {
