@@ -4011,3 +4011,295 @@ body.pagina-sucesso-doacao {
   #site-header.header-logado .barra-pesquisa-logado { order: 3; flex: 1 1 100%; max-width: 100%; margin: 0; }
   #site-header.header-logado .acoes-header { margin-left: auto; }
 }
+
+#nav-auth button[data-action="logout"],
+#nav-auth button[data-action="settings"] {
+    padding: 14px 25px !important;
+    font-size: 15px !important;
+    line-height: normal !important;
+    height: auto !important;
+    box-sizing: border-box;
+}
+
+body:has(#area:not([hidden])) footer {
+    display: none;
+}
+
+#area > .titulo-pagina,
+#area > .subtitulo-pagina,
+#area > .acoes-header {
+    position: relative;
+    z-index: 1;
+}
+
+#area {
+    background: linear-gradient(135deg, #064e3b 0%, #087f5b 55%, #10a36c 100%);
+    padding: 35px;
+    border-radius: 16px;
+}
+
+#area > .titulo-pagina,
+#area > .subtitulo-pagina {
+    color: white;
+}
+
+#area > .acoes-header button {
+    margin-top: 10px;
+}
+
+#area {
+    background: transparent;
+    padding: 0;
+}
+
+.boas-vindas-fundo {
+    background: linear-gradient(135deg, #064e3b, #087f5b, #10a36c);
+    padding: 35px;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
+
+.boas-vindas-fundo .titulo-pagina,
+.boas-vindas-fundo .subtitulo-pagina {
+    color: white;
+}
+
+.boas-vindas-fundo .acoes-header {
+    margin-top: 20px;
+}
+
+.boas-vindas-fundo .acoes-header {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.boas-vindas-fundo .acoes-header button {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 12px;
+    background: #e8f5ee;
+    color: #064e3b;;
+    border: 1px solid white;
+    border-radius: 8px;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.boas-vindas-fundo .acoes-header button:hover {
+    background: #e8f5ee;
+}
+
+body:has(#form-area:not([hidden])) footer {
+    display: none;
+}
+
+#publication-form button {
+    margin-right: 12px;
+    margin-bottom: 10px;
+}
+
+#publication-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#publication-form button[type="submit"],
+#publication-form button[data-action="home"] {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 50px;
+    margin: 0;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+body:has(#mine-area:not([hidden])) footer {
+    display: none;
+}
+
+/* Cabeçalho da tela Minhas publicações */
+body:has(#mine-area:not([hidden])) #nav-auth button[data-action="settings"],
+body:has(#mine-area:not([hidden])) #nav-auth button[data-action="logout"] {
+    display: none;
+}
+
+
+/* =================================
+   MINHAS PUBLICAÇÕES - NOVO DESIGN
+================================= */
+
+#mine-area {
+    padding: 35px;
+    background: #ffffff;
+    min-height: 75vh;
+}
+
+#mine-area > h1 {
+    background: transparent;
+    color: #064e3b;
+    padding: 10px 0;
+    border-radius: 0;
+    margin: 0 0 25px;
+    font-size: 30px;
+    box-shadow: none;
+}
+
+#mine-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+#mine-list h2 {
+    color: #087f5b;
+    font-size: 22px;
+    margin: 10px 0 15px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #d8eee1;
+}
+
+#mine-list p {
+    background: white;
+    color: #64748b;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #e1eee6;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+#mine-list .grade-publicacoes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+#mine-list .card-publicacao {
+    background: white;
+    border: 1px solid #e1eee6;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(6, 78, 59, 0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#mine-list .card-publicacao:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(6, 78, 59, 0.12);
+}
+
+#mine-list .conteudo-card {
+    padding: 20px;
+}
+
+#mine-list .conteudo-card h3 {
+    color: #064e3b;
+    font-size: 19px;
+    margin: 0 0 12px;
+}
+
+#mine-list .conteudo-card p {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    margin: 12px 0;
+    color: #52645a;
+}
+
+#mine-list .categoria-publicacao {
+    display: inline-block;
+    background: #e5f5eb;
+    color: #087f5b;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    #mine-area {
+        padding: 18px;
+    }
+
+    #mine-area > h1 {
+        padding: 24px 20px;
+        font-size: 24px;
+    }
+
+    #mine-list .grade-publicacoes {
+        grid-template-columns: 1fr;
+    }
+}
+
+#mine-list h2:last-of-type {
+    color: #c58b08;
+    border-bottom-color: #f5e4ae;
+}
+
+/* Títulos das publicações na página do usuário */
+
+/* Doações disponíveis - verde */
+#area .secao-publicacoes:first-of-type h2 {
+    color: #087f5b;
+    border-bottom: 2px solid #d1eadb;
+    padding-bottom: 12px;
+}
+
+/* Pedidos da comunidade - amarelo */
+#area .secao-publicacoes:last-of-type h2 {
+    color: #c58b08;
+    border-bottom: 2px solid #f5e4ae;
+    padding-bottom: 12px;
+}
+
+body:has(#settings-area:not([hidden])) footer {
+    display: none;
+}
+
+body:has(#settings-area:not([hidden])) #nav-auth [data-action="settings"] {
+    display: none;
+}
+
+body:has(#settings-area:not([hidden])) #btn-voltar-mine {
+    display: inline-block;
+}
+
+/* Espaçamento entre as seções de configurações */
+#settings-area .formulario-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+#settings-area form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#settings-area hr {
+    width: 100%;
+    margin: 12px 0;
+}
+
+#settings-area button.btn-excluir-conta {
+    background-color: #dc3545 !important;
+    color: #ffffff !important;
+    border: none !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+#settings-area button.btn-excluir-conta:hover {
+    background-color: #bb2d3b !important;
+}
