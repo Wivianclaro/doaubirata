@@ -20,8 +20,9 @@
       <button type="button" data-action="search" aria-label="Pesquisar">⌕</button>
     </div>
     <div id="nav-auth" class="acoes-header">
-      <button class="btn-secundario" data-action="login">Entrar</button>
-      <button class="btn-principal" data-action="register">Inscrever-se</button>
+      <button class="btn-secundario" data-action="home" id="btn-voltar-mine" hidden>Voltar</button>
+      <button class="btn-secundario" data-action="settings">Configurações</button>
+      <button class="btn-login" data-action="logout">Sair</button>
     </div>
   </header>
   <main>
@@ -66,12 +67,16 @@
       </div>
     </section>
     <section id="area" class="minhas-publicacoes" hidden>
-      <h1 class="titulo-pagina" id="boas-vindas">Olá!</h1>
-      <p class="subtitulo-pagina">Encontre doações, veja pedidos e participe da comunidade.</p>
-      <div class="acoes-header"><button class="btn-principal" data-action="donate">＋ Publicar doação</button><button
-          class="btn-secundario" data-action="request">＋ Fazer pedido</button><button class="btn-secundario"
-          data-action="mine">Minhas publicações</button><button class="btn-secundario" data-action="settings">Minha
-          conta</button><button class="btn-login" data-action="logout">Sair</button></div>
+      <div class="boas-vindas-fundo">
+        <h1 class="titulo-pagina" id="boas-vindas">Olá!</h1>
+        <p class="subtitulo-pagina">O que você deseja fazer?</p>
+          <div class="acoes-header">
+              <button class="btn-principal" data-action="donate">Quero fazer uma doação</button>
+              <button class="btn-secundario" data-action="request">Preciso de uma doação</button>
+              <button class="btn-secundario" data-action="mine">Minhas publicações</button>
+          </div>
+      </div>
+
       <section class="secao-publicacoes">
         <h2>💚 Doações disponíveis</h2>
         <div id="doacoes-lista" class="grade-publicacoes"></div>
@@ -106,7 +111,7 @@
     </section>
     <section id="mine-area" class="minhas-publicacoes" hidden>
       <h1>Minhas publicações</h1>
-      <div id="mine-list"></div><button class="btn-secundario" data-action="home">Voltar</button>
+      <div id="mine-list"></div>
     </section>
     <section id="settings-area" class="pagina-formulario" hidden>
       <div class="formulario-conteudo">
@@ -120,9 +125,29 @@
         <hr>
         <h2>Alterar senha</h2>
         <form id="password-form">
-          <div class="campo-form"><label>Nova senha</label><input id="new-password" type="password" minlength="6"
-              required></div><button class="btn-principal">Alterar senha</button>
-        </form><button class="btn-secundario" data-action="home">Voltar</button>
+          <div class="campo-form">
+            <label for="current-password">Senha atual</label>
+            <input id="current-password" type="password" required>
+          </div>
+
+          <div class="campo-form">
+            <label for="new-password">Nova senha</label>
+            <input id="new-password" type="password" minlength="6" required>
+          </div>
+
+          <div class="campo-form">
+            <label for="confirm-password">Confirmar nova senha</label>
+            <input id="confirm-password" type="password" minlength="6" required>
+          </div>
+
+          <button class="btn-principal" type="submit">Alterar senha</button>
+        </form>
+        <hr>
+        <h2>Excluir conta</h2>
+        <p>Essa ação é permanente e não poderá ser desfeita.</p>
+        <button class="btn-principal btn-excluir-conta" type="button" data-action="delete-account">
+          Excluir minha conta
+        </button>
       </div>
     </section>
   </main>
