@@ -46,7 +46,9 @@
         const nav = $('nav-auth');
         if (nav) {
             const estaEmConfiguracoes =
-                id === 'settings-area' || id === 'mine-area';
+                id === 'settings-area' ||
+                id === 'mine-area' ||
+                id === 'form-area';
             nav.innerHTML = estaEmConfiguracoes
                 ? `
                     <button class="btn-secundario" data-action="back">Voltar</button>
@@ -57,13 +59,7 @@
                     <button class="btn-login" data-action="logout">Sair</button>
                 `;
 
-            const esconderBotoes = id === 'form-area';
-
-            if (esconderBotoes) {
-                nav.querySelectorAll('button').forEach(botao => {
-                    botao.hidden = true;
-                });
-            }
+            const esconderBotoes = false;
         }
 
         const pesquisa = $('header-search');
