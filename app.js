@@ -288,9 +288,6 @@ async function openDetails(type, id) {
     const telefone = data.usuarios?.telefone || 'Telefone não informado';
 
     $('detalhes-conteudo').innerHTML = `
-        <button type="button" class="btn-secundario" data-action="back">
-            ← Voltar
-        </button>
 
         ${foto}
 
