@@ -446,7 +446,7 @@ async function openDetails(type, id) {
         await loadFeed();
     }
 
-    // Minhas publicações: função separada, fora de savePublication().
+    //
     async function loadMine() {
         if (!user) {
             return status('Faça login para ver suas publicações.', true);
@@ -459,52 +459,19 @@ async function openDetails(type, id) {
                 .eq('usuario_id', user.id)
                 .order('created_at', { ascending: false }),
 
-            sb
-                .from('pedidos')
-                .select('*')
-                .eq('usuario_id', user.id)
-                .order('created_at', { ascending: false })
-        ]);
+           sb
+               .from('pedidos')
+               .select('*')
+               .eq('usuario_id', user.id)
+               .order('created_at', { ascending: false })
+         ]);
 
-        if (a.error || b.error) {
-            return status(a.error?.message || b.error?.message, true);
-        }
+         if (a.error || b.error) {
+             return status(a.error?.message || b.error?.message, true);
+         }
 
-        const render = (arr, tipo) => arr.map(d => `
-            <article class="card-publicacao">
-                ${tipo === 'doacao' && d.foto
-                    ? `<img class="imagem-publicacao" src="${escapeHtml(d.foto)}" alt="">`
-                    : ''}
-
-                <div class="conteudo-card">
-                    <h3>${escapeHtml(d.item)}</h3>
-
-                    <p>
-                        ${escapeHtml(d.categoria)} · ${escapeHtml(d.status)}
-                    </p>
-
-                    <p>${escapeHtml(d.descricao)}</p>
-
-                    <button
-                        class="botao-card botao-editar"
-                        data-edit="${tipo}:${d.id}">
-                        Editar
-                    </button>
-
-                    <button
-                        class="botao-card botao-excluir"
-                        data-delete="${tipo}:${d.id}">
-                        Excluir
-                    </button>
-
-                    <button
-                        class="botao-card"
-                        data-finish="${tipo}:${d.id}">
-                        Finalizar
-                    </button>
-                </div>
-            </article>
-        `).join('');
+         const render = (arr, tipo) =>
+             arr.map(d => card(d, tipo)).join('');
 
         $('mine-list').innerHTML = `
             <h2>Minhas doações</h2>
@@ -518,11 +485,11 @@ async function openDetails(type, id) {
 
             <div class="grade-publicacoes">
                 ${render(b.data, 'pedido') ||
-                    '<p>Você ainda não publicou pedidos.</p>'}
+                '<p>Você ainda não publicou pedidos.</p>'}
             </div>
         `;
 
-        show('mine-area');
+       show('mine-area');
     }
 
     async function edit(type, id) {
