@@ -446,7 +446,6 @@ async function openDetails(type, id) {
         await loadFeed();
     }
 
-    //
     async function loadMine() {
         if (!user) {
             return status('Faça login para ver suas publicações.', true);
