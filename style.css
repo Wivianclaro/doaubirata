@@ -4564,3 +4564,15 @@ body:has(#settings-area:not([hidden])) #btn-voltar-mine {
 body:has(#detalhes-area:not([hidden])) footer {
     display: none;
 }
+
+/* Mensagens do sistema: melhor visualização no celular */
+#status {
+    max-width: 90%;
+    width: fit-content;
+    margin: 16px auto;
+    padding: 14px 18px;
+    box-sizing: border-box;
+    text-align: center;
+    overflow-wrap: anywhere;
+    line-height: 1.5;
+}
