@@ -22,7 +22,7 @@
         }[c]));
 
     const show = id => {
-        ['area', 'form-area', 'mine-area', 'settings-area'].forEach(x => {
+        ['area', 'form-area', 'mine-area', 'detalhes-area', 'settings-area'].forEach(x => {
             const el = $(x);
             if (el) el.hidden = x !== id;
         });
