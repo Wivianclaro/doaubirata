@@ -454,13 +454,13 @@ async function openDetails(type, id) {
         const [a, b] = await Promise.all([
             sb
                 .from('doacoes')
-                .select('*')
+                .select('*, usuarios(nome, telefone)')
                 .eq('usuario_id', user.id)
                 .order('created_at', { ascending: false }),
 
            sb
                .from('pedidos')
-               .select('*')
+               .select('*, usuarios(nome, telefone)')
                .eq('usuario_id', user.id)
                .order('created_at', { ascending: false })
          ]);
