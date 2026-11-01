@@ -596,7 +596,40 @@ async function openDetails(type, id) {
 
         await sb.auth.signOut();
     }
+    document.addEventListener('click', e => {
+        const botao = e.target.closest('[data-toggle-password]');
 
+        if (!botao) return;
+
+        const campo = document.getElementById(botao.dataset.togglePassword);
+
+        if (!campo) return;
+
+        const mostrar = campo.type === 'password';
+
+        campo.type = mostrar ? 'text' : 'password';
+
+        botao.setAttribute(
+            'aria-label',
+            mostrar ? 'Ocultar senha' : 'Mostrar senha'
+        );
+
+        botao.innerHTML = mostrar
+            ? `
+                <svg class="icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3l18 18"/>
+                    <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
+                    <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
+                    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+                </svg>
+             `
+             : `
+                <svg class="icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+             `;
+    });
     document.addEventListener('click', async e => {
         const b = e.target.closest('[data-action],[data-edit],[data-delete],[data-finish],[data-details]');
 
