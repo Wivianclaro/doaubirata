@@ -4576,3 +4576,24 @@ body:has(#detalhes-area:not([hidden])) footer {
     overflow-wrap: anywhere;
     line-height: 1.5;
 }
+
+/* Mensagens de aviso e cadastro */
+#app-status {
+    width: 100%;
+    padding: 0 12px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+#app-status .aviso {
+    width: 100%;
+    max-width: 500px;
+    margin: 16px auto;
+    padding: 16px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    border-radius: 10px;
+}
