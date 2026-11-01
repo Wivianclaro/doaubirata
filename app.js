@@ -267,7 +267,7 @@ async function openDetails(type, id) {
 
     const { data, error } = await sb
         .from(tabela)
-        .select('*, usuarios(nome, telefone)')
+        .select('*')
         .eq('id', id)
         .single();
 
@@ -284,8 +284,18 @@ async function openDetails(type, id) {
         ? `<img class="detalhes-foto" src="${escapeHtml(data.foto)}" alt="${escapeHtml(data.item)}">`
         : '';
 
-    const nome = data.usuarios?.nome || 'Usuário';
-    const telefone = data.usuarios?.telefone || 'Telefone não informado';
+    const { data: contato, error: erroContato } = await sb
+        .rpc('buscar_contato_usuario', {
+        usuario_id_busca: data.usuario_id
+        })
+        .maybeSingle();
+
+    if (erroContato) {
+        console.error('Erro ao buscar contato:', erroContato);
+    }
+
+    const nome = contato?.nome || 'Usuário';
+    const telefone = contato?.telefone || 'Telefone não informado';
 
     $('detalhes-conteudo').innerHTML = `
 
