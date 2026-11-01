@@ -173,8 +173,22 @@
           <div class="campo-form"><label>Nome completo</label><input id="reg-name" required></div>
           <div class="campo-form"><label>E-mail</label><input id="reg-email" type="email" required></div>
           <div class="campo-form"><label>Telefone</label><input id="reg-phone" required></div>
-          <div class="campo-form"><label>Senha (mínimo 6 caracteres)</label><input id="reg-password" type="password"
-              minlength="6" required></div><button class="btn-principal">Criar conta</button>
+          <div class="campo-form">
+            <label for="reg-password">Senha (mínimo 6 caracteres)</label>
+            <div class="campo-senha">
+              <input id="reg-password" type="password" minlength="6" required>
+              <button type="button" class="mostrar-senha" data-toggle-password="reg-password" aria-label="Mostrar senha">👁️</button>
+            </div>
+          </div>
+
+          <div class="campo-form">
+            <label for="reg-confirm-password">Confirmar senha</label>
+            <div class="campo-senha">
+              <input id="reg-confirm-password" type="password" minlength="6" required>
+              <button type="button" class="mostrar-senha" data-toggle-password="reg-confirm-password" aria-label="Mostrar confirmação de senha">👁️</button>
+            </div>
+          </div>
+          <button class="btn-principal" type="submit">Criar conta</button>
         </form>
         <p class="cadastro-link">Já tem conta? <a href="#" data-action="login">Entrar</a></p>
       </div>
