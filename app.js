@@ -48,7 +48,7 @@
             const estaEmConfiguracoes = id === 'settings-area';
             nav.innerHTML = estaEmConfiguracoes
                 ? `
-                    <button class="btn-secundario" data-action="back">← Voltar</button>
+                    <button class="btn-secundario" data-action="back">Voltar</button>
                     <button class="btn-login" data-action="logout">Sair</button>
                 `
                 : `
