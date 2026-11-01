@@ -45,7 +45,8 @@
 
         const nav = $('nav-auth');
         if (nav) {
-            const estaEmConfiguracoes = id === 'settings-area';
+            const estaEmConfiguracoes =
+                id === 'settings-area' || id === 'mine-area';
             nav.innerHTML = estaEmConfiguracoes
                 ? `
                     <button class="btn-secundario" data-action="back">Voltar</button>
@@ -56,8 +57,7 @@
                     <button class="btn-login" data-action="logout">Sair</button>
                 `;
 
-            const esconderBotoes =
-                id === 'mine-area' || id === 'form-area';
+            const esconderBotoes = id === 'form-area';
 
             if (esconderBotoes) {
                 nav.querySelectorAll('button').forEach(botao => {
