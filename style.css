@@ -4560,3 +4560,7 @@ body:has(#settings-area:not([hidden])) #btn-voltar-mine {
         width: 100%;
     }
 }
+
+body:has(#detalhes-area:not([hidden])) footer {
+    display: none;
+}
