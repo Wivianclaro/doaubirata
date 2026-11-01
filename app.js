@@ -234,7 +234,7 @@
                     <h3>${escapeHtml(d.item)}</h3>
 
                     <span class="categoria-publicacao">
-                        ${escapeHtml(d.categoria)}
+                        Categoria: ${escapeHtml(d.categoria)}
                     </span>
 
                     <p>${escapeHtml(d.descricao)}</p>
