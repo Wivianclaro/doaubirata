@@ -4303,3 +4303,76 @@ body:has(#settings-area:not([hidden])) #btn-voltar-mine {
 #settings-area button.btn-excluir-conta:hover {
     background-color: #bb2d3b !important;
 }
+
+/* ===== Cartões de doações e pedidos ===== */
+
+#doacoes-lista,
+#pedidos-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    align-items: stretch;
+}
+
+#doacoes-lista .card-publicacao,
+#pedidos-lista .card-publicacao {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid #e1e9e5;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+#doacoes-lista .imagem-publicacao,
+#pedidos-lista .imagem-publicacao {
+    order: 2;
+    width: 90px;
+    height: 110px;
+    flex: 0 0 90px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+#doacoes-lista .conteudo-card,
+#pedidos-lista .conteudo-card {
+    flex: 1;
+    min-width: 0;
+}
+
+#doacoes-lista .conteudo-card h3,
+#pedidos-lista .conteudo-card h3 {
+    margin-top: 0;
+    font-size: 17px;
+}
+
+#doacoes-lista .conteudo-card p,
+#pedidos-lista .conteudo-card p {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+#doacoes-lista .acoes-card,
+#pedidos-lista .acoes-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+#doacoes-lista .botao-card,
+#pedidos-lista .botao-card {
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+    #doacoes-lista,
+    #pedidos-lista {
+        grid-template-columns: 1fr;
+    }
+}
