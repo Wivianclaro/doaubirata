@@ -696,12 +696,13 @@ async function openDetails(type, id) {
             email,
             password,
             options: {
+                emailRedirectTo: 'https://wivianclaro.github.io/doaubirata/',
                 data: {
                     nome,
                     telefone
-                }
+               }
             }
-        });
+        }); 
 
         if (error) {
             return status(error.message, true);
