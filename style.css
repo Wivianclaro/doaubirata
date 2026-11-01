@@ -4376,3 +4376,73 @@ body:has(#settings-area:not([hidden])) #btn-voltar-mine {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== Acabamento dos cartões de publicações ===== */
+
+.card-publicacao {
+    overflow: hidden;
+    border: 1px solid #e2ebe5;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-publicacao .conteudo-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 14px;
+}
+
+.card-publicacao .conteudo-card h3 {
+    margin: 0;
+    color: #183c2e;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.card-publicacao .categoria-publicacao,
+.card-publicacao .status-publicacao {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: #e1f4e8;
+    color: #176b45;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-publicacao .rodape-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid #edf1ee;
+}
+
+.card-publicacao .autor-publicacao {
+    color: #64746b;
+    font-size: 12px;
+}
+
+.card-publicacao .link-detalhes {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: #16764f;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.card-publicacao .link-detalhes:hover {
+    color: #0d5035;
+}
