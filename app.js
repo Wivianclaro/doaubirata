@@ -218,63 +218,48 @@
             '<p>Nenhum pedido aberto no momento.</p>';
     }
 
-    function card(d, t) {
-        const mine = user && d.usuario_id === user.id;
+function card(d, t) {
+    const foto =
+        t === 'doacao' && d.foto
+            ? `<img class="imagem-publicacao" src="${escapeHtml(d.foto)}" alt="">`
+            : '';
 
-        const foto =
-            t === 'doacao' && d.foto
-                ? `<img class="imagem-publicacao" src="${escapeHtml(d.foto)}" alt="">`
-                : '';
+    return `
+        <article class="card-publicacao">
+            ${foto}
 
-        return `
-            <article class="card-publicacao">
-                ${foto}
+            <div class="conteudo-card">
+                <h3>${escapeHtml(d.item)}</h3>
 
-                <div class="conteudo-card">
-                    <h3>${escapeHtml(d.item)}</h3>
+                <span class="categoria-publicacao">
+                    Categoria: ${escapeHtml(d.categoria)}
+                </span>
 
-                    <span class="categoria-publicacao">
-                        Categoria: ${escapeHtml(d.categoria)}
+                <p>${escapeHtml(d.descricao)}</p>
+
+                <p>
+                    <span class="status-publicacao">
+                        ${t === 'doacao' ? 'Disponível' : 'Pedido aberto'}
                     </span>
+                </p>
 
-                    <p>${escapeHtml(d.descricao)}</p>
-
-                    <small>
+                <div class="rodape-card">
+                    <small class="autor-publicacao">
                         Publicado por ${escapeHtml(d.usuarios?.nome || 'usuário')}
                     </small>
 
-                    <p>
-                        <span class="status-publicacao">
-                            ${t === 'doacao' ? 'Disponível' : 'Pedido aberto'}
-                        </span>
-                    </p>
-
-                    ${mine ? `
-                        <div class="acoes-card">
-                            <button
-                                class="botao-card botao-editar"
-                                data-edit="${t}:${d.id}">
-                                Editar
-                            </button>
-
-                            <button
-                                class="botao-card botao-excluir"
-                                data-delete="${t}:${d.id}">
-                                Excluir
-                            </button>
-
-                            <button
-                                class="botao-card"
-                                data-finish="${t}:${d.id}">
-                                Finalizar
-                            </button>
-                        </div>
-                    ` : ''}
+                    <button
+                        type="button"
+                        class="link-detalhes"
+                        data-details="${t}:${d.id}">
+                        Ver detalhes →
+                    </button>
                 </div>
-            </article>
-        `;
-    }
-
+            </div>
+        </article>
+    `;
+}
+    
     function openForm(type, row = null) {
         formType = type;
         editing = row;
