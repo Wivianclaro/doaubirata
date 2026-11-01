@@ -259,6 +259,78 @@ function card(d, t) {
         </article>
     `;
 }
+
+async function openDetails(type, id) {
+    const tabela = type === 'doacao' ? 'doacoes' : 'pedidos';
+
+    const { data, error } = await sb
+        .from(tabela)
+        .select('*, usuarios(nome, telefone)')
+        .eq('id', id)
+        .single();
+
+    if (error || !data) {
+        alert('Não foi possível carregar os detalhes desta publicação.');
+        console.error(error);
+        return;
+    }
+
+    const eDoacao = type === 'doacao';
+    const minhaPublicacao = user && data.usuario_id === user.id;
+
+    const foto = eDoacao && data.foto
+        ? `<img class="detalhes-foto" src="${escapeHtml(data.foto)}" alt="${escapeHtml(data.item)}">`
+        : '';
+
+    const nome = data.usuarios?.nome || 'Usuário';
+    const telefone = data.usuarios?.telefone || 'Telefone não informado';
+
+    $('detalhes-conteudo').innerHTML = `
+        <button type="button" class="btn-secundario" data-action="back">
+            ← Voltar
+        </button>
+
+        ${foto}
+
+        <h1>${escapeHtml(data.item)}</h1>
+
+        <span class="categoria-publicacao">
+            Categoria: ${escapeHtml(data.categoria || 'Não informada')}
+        </span>
+
+        <h2>${eDoacao ? 'Sobre esta doação' : 'Sobre este pedido'}</h2>
+        <p>${escapeHtml(data.descricao || 'Nenhuma descrição informada.')}</p>
+
+        <section class="detalhes-contato">
+            <h2>Contato de quem publicou</h2>
+            <p><strong>Nome:</strong> ${escapeHtml(nome)}</p>
+            <p><strong>Telefone:</strong> ${escapeHtml(telefone)}</p>
+        </section>
+
+        ${minhaPublicacao ? `
+            <section class="detalhes-acoes">
+                <h2>Gerenciar publicação</h2>
+
+                <button type="button" class="botao-card botao-editar"
+                    data-edit="${type}:${data.id}">
+                    Editar publicação
+                </button>
+
+                <button type="button" class="botao-card"
+                    data-finish="${type}:${data.id}">
+                    ${eDoacao ? 'Marcar como doado' : 'Marcar como atendido'}
+                </button>
+
+                <button type="button" class="botao-card botao-excluir"
+                    data-delete="${type}:${data.id}">
+                    Excluir publicação
+                </button>
+            </section>
+        ` : ''}
+    `;
+
+    show('detalhes-area');
+}
     
     function openForm(type, row = null) {
         formType = type;
@@ -551,13 +623,17 @@ function card(d, t) {
     }
 
     document.addEventListener('click', async e => {
-        const b = e.target.closest(
-            '[data-action],[data-edit],[data-delete],[data-finish]'
-        );
+        const b = e.target.closest('[data-action],[data-edit],[data-delete],[data-finish],[data-details]');
 
         if (!b) return;
 
         const act = b.dataset.action;
+
+        if (b.dataset.details) {
+            const [type, id] = b.dataset.details.split(':');
+            await openDetails(type, id);
+            return;
+        }
 
         if (act === 'login') modal('login-panel');
         if (act === 'register') modal('register-panel');
