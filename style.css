@@ -4597,3 +4597,43 @@ body:has(#detalhes-area:not([hidden])) footer {
     overflow-wrap: anywhere;
     border-radius: 10px;
 }
+
+/* Campos de senha com botão mostrar/ocultar dentro da caixa */
+.campo-senha {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.campo-senha input {
+    width: 100%;
+    padding-right: 45px;
+    box-sizing: border-box;
+}
+
+.mostrar-senha {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    font-size: 0;
+}
+
+.mostrar-senha:hover {
+    color: #24855b;
+}
+
+.mostrar-senha svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
