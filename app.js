@@ -48,7 +48,9 @@
             const estaEmConfiguracoes =
                 id === 'settings-area' ||
                 id === 'mine-area' ||
-                id === 'form-area';
+                id === 'form-area' ||
+                id === 'detalhes-area';
+            
             nav.innerHTML = estaEmConfiguracoes
                 ? `
                     <button class="btn-secundario" data-action="back">Voltar</button>
