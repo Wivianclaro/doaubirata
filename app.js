@@ -182,13 +182,13 @@
 
         let q1 = sb
             .from('doacoes')
-            .select('id,usuario_id,item,categoria,descricao,foto,status,created_at,usuarios(nome)')
+            .select('id,usuario_id,item,categoria,descricao,foto,status,created_at,usuarios(nome,telefone)')
             .eq('status', 'disponivel')
             .order('created_at', { ascending: false });
 
         let q2 = sb
             .from('pedidos')
-            .select('id,usuario_id,item,categoria,descricao,status,created_at,usuarios(nome)')
+            .select('id,usuario_id,item,categoria,descricao,status,created_at,usuarios(nome,telefone)')
             .eq('status', 'aberto')
             .order('created_at', { ascending: false });
 
