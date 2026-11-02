@@ -70,7 +70,12 @@
     };
 
     const modal = (panel = 'login-panel') => {
-        ['login-panel', 'register-panel', 'forgot-panel'].forEach(x => {
+        [
+            'login-panel',
+            'register-panel',
+            'forgot-panel',
+            'reset-password-panel'
+        ].forEach(x => {
             $(x).hidden = x !== panel;
         });
 
@@ -102,15 +107,19 @@
         const { data: { session } } = await sb.auth.getSession();
 
         user = session?.user || null;
-
         if (user) {
             await loadUser();
         } else {
             resetAuth();
         }
 
-        sb.auth.onAuthStateChange((_event, session) => {
+        sb.auth.onAuthStateChange((event, session) => {
             user = session?.user || null;
+
+            if (event === 'PASSWORD_RECOVERY') {
+                modal('reset-password-panel');
+                return;
+            }
 
             if (user) {
                 loadUser();
@@ -855,9 +864,9 @@ async function openDetails(type, id) {
         e.preventDefault();
 
         const { error } = await sb.auth.resetPasswordForEmail(
-            $('forgot-email').value,
+            $('forgot-email').value.trim(),
             {
-                redirectTo: location.origin + location.pathname
+                redirectTo: 'https://wivianclaro.github.io/doaubirata/'
             }
         );
 
@@ -870,6 +879,38 @@ async function openDetails(type, id) {
         status(
             'Se o e-mail estiver cadastrado, você receberá um link para redefinir a senha.'
         );
+    });
+
+    $('reset-password-form').addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const novaSenha = $('reset-new-password').value;
+        const confirmarSenha = $('reset-confirm-password').value;
+
+        if (novaSenha.length < 6) {
+            return status('A senha deve ter pelo menos 6 caracteres.', true);
+        }
+
+        if (novaSenha !== confirmarSenha) {
+            return status('As senhas não coincidem.', true);
+        }
+
+        const { error } = await sb.auth.updateUser({
+            password: novaSenha
+        });
+
+        if (error) {
+            return status(
+                'Não foi possível redefinir a senha. Solicite um novo link de recuperação. Detalhes: ' +
+                error.message,
+                true
+            );
+        }
+
+        $('reset-password-form').reset();
+        closeModal();
+
+        status('Senha redefinida com sucesso! Você já pode entrar com a nova senha.');
     });
 
     init();
