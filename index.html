@@ -126,17 +126,59 @@
         <form id="password-form">
           <div class="campo-form">
             <label for="current-password">Senha atual</label>
-            <input id="current-password" type="password" required>
-          </div>
+            <div class="campo-senha">
+              <input id="current-password" type="password" required>
+              <button type="button" class="mostrar-senha"
+               data-toggle-password="current-password"
+               aria-label="Mostrar senha">
+               <svg class="icone-olho" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3l18 18"/>
+                <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
+                <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
+                <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+               </svg>
+              </button>
+             </div>
+            </div>
           <div class="campo-form">
             <label for="new-password">Nova senha</label>
-            <input id="new-password" type="password" minlength="6" required>
-          </div>
+            <div class="campo-senha">
+             <input id="new-password" type="password" minlength="6" required>
+             <button type="button" class="mostrar-senha"
+              data-toggle-password="new-password"
+              aria-label="Mostrar senha">
+              <svg class="icone-olho" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+               <path d="M3 3l18 18"/>
+               <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
+               <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
+               <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+              </svg>
+             </button>
+            </div>
+           </div>
 
           <div class="campo-form">
             <label for="confirm-password">Confirmar nova senha</label>
-            <input id="confirm-password" type="password" minlength="6" required>
-          </div>
+            <div class="campo-senha">
+             <input id="confirm-password" type="password" minlength="6" required>
+             <button type="button" class="mostrar-senha"
+              data-toggle-password="confirm-password"
+              aria-label="Mostrar confirmação de senha">
+              <svg class="icone-olho" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round">
+               <path d="M3 3l18 18"/>
+               <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
+               <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
+               <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>
+              </svg>
+             </button>
+            </div>
+           </div>
 
           <button class="btn-principal" type="submit">Alterar senha</button>
         </form>
