@@ -275,6 +275,36 @@
           <button class="btn-principal">Enviar link de recuperação</button>
         </form>
       </div>
+      <div id="reset-password-panel" hidden>
+        <h2>Redefinir senha</h2>
+        <p>Digite sua nova senha abaixo.</p>
+
+        <form id="reset-password-form">
+          <div class="campo-form">
+            <label for="reset-new-password">Nova senha (mínimo 6 caracteres)</label>
+            <input
+              id="reset-new-password"
+              type="password"
+              minlength="6"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+
+          <div class="campo-form">
+            <label for="reset-confirm-password">Confirmar nova senha</label>
+            <input
+              id="reset-confirm-password"
+              type="password"
+              minlength="6"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+
+          <button class="btn-principal" type="submit">Salvar nova senha</button>
+        </form>
+      </div>
     </div>
   </div>
   <div id="app-status" aria-live="polite"></div>
