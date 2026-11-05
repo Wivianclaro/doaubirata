@@ -339,6 +339,10 @@ async function openDetails(type, id) {
 
     const nome = contato?.nome || 'Usuário';
     const telefone = contato?.telefone || 'Telefone não informado';
+    
+    const publicacaoConcluida = eDoacao
+    ? data.status === 'finalizada'
+    : data.status === 'atendido';
 
     $('detalhes-conteudo').innerHTML = `
 
@@ -368,10 +372,12 @@ async function openDetails(type, id) {
                     Editar publicação
                 </button>
 
-                <button type="button" class="botao-card"
-                    data-finish="${type}:${data.id}">
-                    ${eDoacao ? 'Marcar como doado' : 'Marcar como atendido'}
-                </button>
+                ${!publicacaoConcluida ? `
+                    <button type="button" class="botao-card"
+                        data-finish="${type}:${data.id}">
+                        ${eDoacao ? 'Marcar como doado' : 'Marcar como atendido'}
+                    </button>
+                ` : ''}
 
                 <button type="button" class="botao-card botao-excluir"
                     data-delete="${type}:${data.id}">
