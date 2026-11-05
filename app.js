@@ -393,7 +393,7 @@ async function openDetails(type, id) {
             return status('Preencha todos os campos.', true);
         }
 
-        if (formType === 'doacao' && !editing) {
+        if (formType === 'doacao') {
             const file = $('foto').files[0];
 
             if (file) {
@@ -414,7 +414,7 @@ async function openDetails(type, id) {
                     .upload(path, file);
 
                 if (up.error) {
-                    return status(up.error.message, true);
+                    return status('Erro ao enviar foto: ' + up.error.message, true);
                 }
 
                 row.foto = sb
@@ -428,13 +428,19 @@ async function openDetails(type, id) {
         let result;
 
         if (editing) {
+            const dadosAtualizados = {
+                item: row.item,
+                categoria: row.categoria,
+                descricao: row.descricao
+            };
+
+            if (formType === 'doacao' && row.foto) {
+                dadosAtualizados.foto = row.foto;
+            }
+
             result = await sb
                 .from(formType === 'doacao' ? 'doacoes' : 'pedidos')
-                .update({
-                    item: row.item,
-                    categoria: row.categoria,
-                    descricao: row.descricao
-                })
+                .update(dadosAtualizados)
                 .eq('id', editing.id)
                 .eq('usuario_id', user.id);
         } else {
