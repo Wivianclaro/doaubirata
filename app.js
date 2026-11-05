@@ -737,7 +737,8 @@ async function openDetails(type, id) {
 
         // Verificar se as senhas coincidem
         if (password !== confirmarSenha) {
-            return status('As senhas não conferem. Verifique e tente novamente.', true);
+            alert('ERRO: As senhas não conferem!');
+            return;
         }
 
         if (nome.split(/\s+/).length < 2) {
