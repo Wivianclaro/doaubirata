@@ -254,7 +254,7 @@ function card(d, t) {
                 <p>
                     <span class="status-publicacao">
                         ${t === 'doacao'
-                            ? (d.status === 'doado' ? 'Doado' : 'Disponível')
+                            ? (d.status === 'finalizada' ? 'Doado' : 'Disponível')
                             : (d.status === 'atendido' ? 'Atendido' : 'Pedido aberto')}
                     </span>
                 </p>
