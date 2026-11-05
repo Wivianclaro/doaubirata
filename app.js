@@ -508,13 +508,13 @@ async function openDetails(type, id) {
         const [a, b] = await Promise.all([
             sb
                 .from('doacoes')
-                .select('*, usuarios(nome, telefone)')
+                .select('*')
                 .eq('usuario_id', user.id)
                 .order('created_at', { ascending: false }),
 
            sb
                .from('pedidos')
-               .select('*, usuarios(nome, telefone)')
+               .select('*')
                .eq('usuario_id', user.id)
                .order('created_at', { ascending: false })
          ]);
@@ -522,23 +522,25 @@ async function openDetails(type, id) {
          if (a.error || b.error) {
              return status(a.error?.message || b.error?.message, true);
          }
-
-         const render = (arr, tipo) =>
-             arr.map(d => card(d, tipo)).join('');
+         
+        const doacoesComNomes = await carregarNomesPublicacoes(a.data);
+        const pedidosComNomes = await carregarNomesPublicacoes(b.data);
+        const render = (arr, tipo) =>
+            arr.map(d => card(d, tipo)).join('');
 
         $('mine-list').innerHTML = `
             <h2>Minhas doações</h2>
 
             <div class="grade-publicacoes">
-                ${render(a.data, 'doacao') ||
-                    '<p>Você ainda não publicou doações.</p>'}
+                ${render(doacoesComNomes, 'doacao') ||
+                  '<p>Você ainda não publicou doações.</p>'}
             </div>
 
             <h2>Meus pedidos</h2>
 
             <div class="grade-publicacoes">
-                ${render(b.data, 'pedido') ||
-                '<p>Você ainda não publicou pedidos.</p>'}
+                ${render(pedidosComNomes, 'pedido') ||
+                  '<p>Você ainda não publicou pedidos.</p>'}
             </div>
         `;
 
