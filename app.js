@@ -733,6 +733,42 @@ async function openDetails(type, id) {
         const email = $('reg-email').value.trim();
         const telefone = $('reg-phone').value.trim();
         const password = $('reg-password').value;
+        const confirmarSenha = $('reg-confirm-password').value;
+
+        // Verificar se as senhas coincidem
+        if (password !== confirmarSenha) {
+            return status('As senhas não conferem. Verifique e tente novamente.', true);
+        }
+
+        if (nome.split(/\s+/).length < 2) {
+            return status('Digite seu nome completo.', true);
+        }
+
+        const { data, error } = await sb.auth.signUp({
+            email,
+            password,
+            options: {
+                emailRedirectTo: 'https://doaubirata.github.io/doaubirata/',
+                data: {
+                    nome,
+                    telefone
+                }
+            }
+        });
+
+        if (error) {
+            return status(error.message, true);
+        }
+
+        $('register-form').reset();
+        closeModal();
+
+        status(
+            data.session
+                ? 'Cadastro realizado!'
+                : 'Cadastro iniciado. Verifique seu e-mail para confirmar a conta.'
+        );
+    });
 
         if (nome.split(/\s+/).length < 2) {
             return status('Digite seu nome completo.', true);
