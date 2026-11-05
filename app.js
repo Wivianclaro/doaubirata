@@ -742,7 +742,7 @@ async function openDetails(type, id) {
             email,
             password,
             options: {
-                emailRedirectTo: 'https://wivianclaro.github.io/doaubirata/',
+                emailRedirectTo: 'https://doaubirata.github.io/doaubirata/',
                 data: {
                     nome,
                     telefone
@@ -866,7 +866,7 @@ async function openDetails(type, id) {
         const { error } = await sb.auth.resetPasswordForEmail(
             $('forgot-email').value.trim(),
             {
-                redirectTo: 'https://wivianclaro.github.io/doaubirata/'
+                redirectTo: 'https://doaubirata.github.io/doaubirata/'
             }
         );
 
