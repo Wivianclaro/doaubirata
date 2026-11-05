@@ -770,35 +770,6 @@ async function openDetails(type, id) {
         );
     });
 
-        if (nome.split(/\s+/).length < 2) {
-            return status('Digite seu nome completo.', true);
-        }
-
-        const { data, error } = await sb.auth.signUp({
-            email,
-            password,
-            options: {
-                emailRedirectTo: 'https://doaubirata.github.io/doaubirata/',
-                data: {
-                    nome,
-                    telefone
-               }
-            }
-        }); 
-
-        if (error) {
-            return status(error.message, true);
-        }
-
-        closeModal();
-
-        status(
-            data.session
-                ? 'Cadastro realizado!'
-                : 'Cadastro iniciado. Verifique seu e-mail para confirmar a conta.'
-        );
-    });
-
     $('publication-form').addEventListener('submit', savePublication);
 
     $('settings-form').addEventListener('submit', async e => {
