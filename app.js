@@ -193,13 +193,13 @@
 
         let q1 = sb
             .from('doacoes')
-            .select('id,usuario_id,item,categoria,descricao,foto,status,created_at,usuarios(nome,telefone)')
+            .select('id,usuario_id,item,categoria,descricao,foto,status,created_at')
             .eq('status', 'disponivel')
             .order('created_at', { ascending: false });
 
         let q2 = sb
             .from('pedidos')
-            .select('id,usuario_id,item,categoria,descricao,status,created_at,usuarios(nome,telefone)')
+            .select('id,usuario_id,item,categoria,descricao,status,created_at')
             .eq('status', 'aberto')
             .order('created_at', { ascending: false });
 
@@ -220,12 +220,15 @@
             return;
         }
 
+        const doacoesComNomes = await carregarNomesPublicacoes(a.data);
+        const pedidosComNomes = await carregarNomesPublicacoes(b.data);
+
         $('doacoes-lista').innerHTML =
-            a.data.map(d => card(d, 'doacao')).join('') ||
+            doacoesComNomes.map(d => card(d, 'doacao')).join('') ||
             '<p>Nenhuma doação disponível no momento.</p>';
 
         $('pedidos-lista').innerHTML =
-            b.data.map(d => card(d, 'pedido')).join('') ||
+            pedidosComNomes.map(d => card(d, 'pedido')).join('') ||
             '<p>Nenhum pedido aberto no momento.</p>';
     }
 
@@ -270,6 +273,35 @@ function card(d, t) {
         </article>
     `;
 }
+
+async function carregarNomesPublicacoes(publicacoes) {
+    const ids = [...new Set(
+        publicacoes.map(p => p.usuario_id).filter(Boolean)
+    )];
+
+    if (!ids.length) return publicacoes;
+
+    const { data, error } = await sb.rpc('buscar_nomes_usuarios', {
+        ids_usuarios: ids
+    });
+
+    if (error) {
+        console.error('Erro ao buscar nomes:', error);
+        return publicacoes;
+    }
+
+    const nomes = Object.fromEntries(
+        (data || []).map(u => [u.usuario_id, u.nome])
+    );
+
+    return publicacoes.map(p => ({
+        ...p,
+        usuarios: {
+            ...(p.usuarios || {}),
+            nome: nomes[p.usuario_id] || 'usuário'
+        }
+    }));
+}    
 
 async function openDetails(type, id) {
     const tabela = type === 'doacao' ? 'doacoes' : 'pedidos';
