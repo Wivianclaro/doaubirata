@@ -851,6 +851,15 @@ async function openDetails(type, id) {
 
     
       if (novoEmail.toLowerCase() !== emailAtual.toLowerCase()) {
+          const { data: { session }, error: sessionError } =
+              await sb.auth.getSession();
+
+          console.log('Verificação da sessão:', {
+              existeSessao: !!session,
+              erro: sessionError?.message,
+              usuarioLogado: !!session?.user,
+              usuarioAtual: !!user
+          });
           const { error: emailError } = await sb.auth.updateUser(
               {
                   email: novoEmail
