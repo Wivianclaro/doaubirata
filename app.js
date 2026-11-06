@@ -2,7 +2,27 @@
     const $ = id => document.getElementById(id);
 
     let sb, user = null, profile = null, formType = 'doacao', editing = null;
+    const chavePagina = () =>
+        user?.id ? `doaubirata-pagina-${user.id}` : null;
 
+    const salvarPagina = pagina => {
+        const chave = chavePagina();
+        if (chave) {
+            sessionStorage.setItem(chave, JSON.stringify(pagina));
+        }
+    };
+
+    const lerPagina = () => {
+        const chave = chavePagina();
+        if (!chave) return null;
+
+        try {
+            return JSON.parse(sessionStorage.getItem(chave));
+        } catch {
+            return null;
+        }
+    };
+    
     const status = (msg, error = false) => {
         $('app-status').innerHTML =
             `<div class="aviso ${error ? 'erro' : ''}">${escapeHtml(msg)}</div>`;
@@ -21,7 +41,7 @@
             "'": '&#39;'
         }[c]));
 
-    const show = id => {
+    const show = (id, detalhes = {}) => {
         ['area', 'form-area', 'mine-area', 'detalhes-area', 'settings-area'].forEach(x => {
             const el = $(x);
             if (el) el.hidden = x !== id;
@@ -44,13 +64,14 @@
         }
 
         const nav = $('nav-auth');
+
         if (nav) {
             const estaEmConfiguracoes =
                 id === 'settings-area' ||
                 id === 'mine-area' ||
                 id === 'form-area' ||
                 id === 'detalhes-area';
-            
+
             nav.innerHTML = estaEmConfiguracoes
                 ? `
                     <button class="btn-secundario" data-action="back">Voltar</button>
@@ -60,13 +81,15 @@
                     <button class="btn-secundario" data-action="settings">Configurações</button>
                     <button class="btn-login" data-action="logout">Sair</button>
                 `;
-
-            const esconderBotoes = false;
         }
 
         const pesquisa = $('header-search');
 
         if (pesquisa) pesquisa.hidden = id !== 'area';
+
+        if (id) {
+            salvarPagina({ id, ...detalhes });
+        }
     };
 
     const modal = (panel = 'login-panel') => {
@@ -135,8 +158,6 @@
     async function loadUser() {
         if (!user) return;
 
-        show('area');
-
         $('header-search').hidden = false;
         $('site-header').classList.add('header-logado');
 
@@ -173,6 +194,47 @@
             `Olá, ${profile?.nome || user.email}!`;
 
         await loadFeed();
+        await restaurarPagina();
+    }
+
+    async function restaurarPagina() {
+        const pagina = lerPagina();
+
+        if (!pagina || !pagina.id) {
+            show('area');
+            return;
+        }
+
+        if (pagina.id === 'area') {
+            show('area');
+            return;
+        }
+
+        if (pagina.id === 'settings-area') {
+            await showSettings();
+            return;
+        }
+
+        if (pagina.id === 'mine-area') {
+            await loadMine();
+            return;
+        }
+
+        if (pagina.id === 'form-area') {
+            if (pagina.editingId) {
+                await edit(pagina.type, pagina.editingId);
+            } else {
+                openForm(pagina.type || 'doacao');
+            }
+            return;
+        }
+
+        if (pagina.id === 'detalhes-area') {
+            await openDetails(pagina.type, pagina.idPublicacao);
+            return;
+        }
+
+        show('area');
     }
 
     function resetAuth() {
@@ -390,7 +452,10 @@ async function openDetails(type, id) {
         ` : ''}
     `;
 
-    show('detalhes-area');
+    show('detalhes-area', {
+        type,
+        idPublicacao: id
+    });
 }
     
     function openForm(type, row = null) {
@@ -415,7 +480,10 @@ async function openDetails(type, id) {
         $('pub-id').value = row?.id || '';
         $('foto-field').hidden = type !== 'doacao';
 
-        show('form-area');
+        show('form-area', {
+            type,
+            editingId: row?.id || null
+        });
     }
 
     async function savePublication(e) {
