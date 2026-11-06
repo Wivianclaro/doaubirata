@@ -852,12 +852,9 @@ async function openDetails(type, id) {
     
       if (novoEmail.toLowerCase() !== emailAtual.toLowerCase()) {
           const { error: emailError } = await sb.auth.updateUser({
-                  email: novoEmail
-              },
-              {
-                  emailRedirectTo: 'https://doaubirata.github.io/doaubirata/'
-              }
-          );
+              email: novoEmail
+          });
+          
           if (emailError) {
               await loadUser();
               return status(
