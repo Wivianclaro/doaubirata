@@ -85,7 +85,7 @@
     const closeModal = () => {
         $('auth-modal').classList.remove('ativo');
     };
-
+    
     async function init() {
         if (
             !window.supabase ||
@@ -104,15 +104,7 @@
             window.SUPABASE_ANON_KEY
         );
 
-        const { data: { session } } = await sb.auth.getSession();
-
-        user = session?.user || null;
-        if (user) {
-            await loadUser();
-        } else {
-            resetAuth();
-        }
-
+        // Registrar primeiro os eventos de autenticação.
         sb.auth.onAuthStateChange((event, session) => {
             user = session?.user || null;
 
@@ -127,6 +119,17 @@
                 resetAuth();
             }
         });
+
+        // Consultar a sessão depois de registrar os eventos.
+        const { data: { session } } = await sb.auth.getSession();
+
+        user = session?.user || null;
+
+        if (user) {
+            await loadUser();
+        } else {
+            resetAuth();
+        }
     }
 
     async function loadUser() {
