@@ -627,6 +627,7 @@ async function openDetails(type, id) {
 
         $('profile-name').value = profile?.nome || '';
         $('profile-phone').value = profile?.telefone || '';
+        $('profile-email').value = user.email || '';
 
         show('settings-area');
     }
