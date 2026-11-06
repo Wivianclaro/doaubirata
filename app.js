@@ -136,10 +136,15 @@
                 return;
             }
 
-            if (user) {
-                loadUser();
-            } else {
+            if (event === 'SIGNED_OUT') {
                 resetAuth();
+                return;
+            }
+
+            if (event === 'SIGNED_IN' || event === 'USER_UPDATED') {
+                if (user) {
+                    loadUser();
+                }
             }
         });
 
