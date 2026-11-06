@@ -623,7 +623,6 @@ async function openDetails(type, id) {
         }
 
         $('profile-name').value = profile?.nome || '';
-        $('profile-email').value = user.email || '';
         $('profile-phone').value = profile?.telefone || '';
 
         show('settings-area');
@@ -821,61 +820,33 @@ async function openDetails(type, id) {
     $('publication-form').addEventListener('submit', savePublication);
 
     $('settings-form').addEventListener('submit', async e => {
-    e.preventDefault();
+        e.preventDefault();
 
-      if (!user) {
-          return status('Faça login novamente para alterar seus dados.', true);
-      }
+        if (!user) {
+            return status('Faça login novamente para alterar seus dados.', true);
+        }
 
-      const nome = $('profile-name').value.trim();
-      const telefone = $('profile-phone').value.trim();
-      const novoEmail = $('profile-email').value.trim();
-      const emailAtual = user.email || '';
-      if (!nome || !telefone || !novoEmail) {
-          return status('Preencha todos os campos.', true);
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(novoEmail)) {
-          return status('Digite um e-mail válido.', true);
-      }
-      const { error: perfilError } = await sb
-          .from('usuarios')
-          .update({
-              nome,
-              telefone
-          })
-          .eq('id', user.id);
+        const nome = $('profile-name').value.trim();
+        const telefone = $('profile-phone').value.trim();
 
-      if (perfilError) {
-          return status('Erro ao salvar os dados: ' + perfilError.message, true);
-      }
+        if (!nome || !telefone) {
+            return status('Preencha nome e telefone.', true);
+        }
 
-    
-      if (novoEmail.toLowerCase() !== emailAtual.toLowerCase()) {
-          const { error: emailError } = await sb.auth.updateUser(
-              {
-                  email: novoEmail
-              },
-              {
-                  emailRedirectTo: 'https://doaubirata.github.io/doaubirata/'
-              }
-          );
-          
-          if (emailError) {
-              await loadUser();
-              return status(
-                  'Nome e telefone foram salvos, mas não foi possível alterar o e-mail: ' +
-                  emailError.message,
-                  true
-              );
-          }
+        const { error: perfilError } = await sb
+            .from('usuarios')
+            .update({
+                nome,
+                telefone
+            })
+            .eq('id', user.id);
 
-          status(
-              'Nome e telefone salvos. Verifique sua caixa de entrada para confirmar a alteração do e-mail.'
-          );
-      } else {
-          status('Nome e telefone atualizados com sucesso!');
-      }
-      await loadUser();
+        if (perfilError) {
+            return status('Erro ao salvar os dados: ' + perfilError.message, true);
+        }
+
+        status('Nome e telefone atualizados com sucesso!');
+        await loadUser();
     });
 
     $('password-form').addEventListener('submit', async e => {
