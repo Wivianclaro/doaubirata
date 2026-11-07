@@ -5,8 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Conectando pessoas que desejam doar com quem precisa em Ubiratã-PR.">
+  
   <title>DoaUbiratã - Plataforma de Doações</title>
+  
   <link rel="stylesheet" href="style.css">
+  
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabase-config.js"></script>
   <script defer src="app.js"></script>
@@ -14,47 +17,66 @@
 
 <body>
   <header id="site-header">
-    <a class="logo" href="#inicio" style="text-decoration: none;"><span>♡</span> DoaUbiratã</a>
+    <a class="logo" href="#inicio" style="text-decoration: none;">
+      <span>♡</span> DoaUbiratã</a>
     <div class="barra-pesquisa-logado" id="header-search" hidden>
-      <input id="search" type="search" placeholder="Pesquisar item, categoria ou descrição" aria-label="Pesquisar doações e pedidos">
+      <input 
+        id="search" 
+        type="search" 
+        placeholder="Pesquisar item, categoria ou descrição" 
+        aria-label="Pesquisar doações e pedidos"
+      >
       <button type="button" data-action="search" aria-label="Pesquisar">⌕</button>
     </div>
     <div id="nav-auth" class="acoes-header"></div>
   </header>
+  
   <main>
     <section id="inicio" class="hero">
       <div class="hero-text">
-        <h1>Doe o que você não usa. <strong>Ajude quem precisa.</strong></h1>
+        <h1>Doe o que você não usa. 
+          <strong>Ajude quem precisa.</strong>
+        </h1>
         <p>Conectamos pessoas que desejam doar com pessoas que precisam de ajuda em Ubiratã-PR.</p>
-        <div class="botoes"><button class="btn-principal" data-action="register">Inscrever-se</button><button
-            class="btn-secundario" data-action="login">Entrar</button></div>
+        <div class="botoes">
+          <button class="btn-principal" data-action="register">Inscrever-se</button>
+          <button class="btn-secundario" data-action="login">Entrar</button>
+        </div>
       </div>
+      
       <div class="hero-card">
         <div class="coracao">♡</div>
         <h2>Uma pequena atitude pode fazer a diferença.</h2>
         <p>Móveis, roupas, alimentos, livros e outros itens podem ganhar um novo destino.</p>
       </div>
+      
     </section>
+    
     <section id="como-funciona" class="como">
-      <div class="titulo"><span>COMO FUNCIONA</span>
+      <div class="titulo">
+        <span>COMO FUNCIONA</span>
         <h2>Doar é simples</h2>
       </div>
+      
       <div class="passos">
         <div class="passo">
           <div class="numero">1</div>
           <h3>Cadastre-se</h3>
           <p>Crie sua conta para participar da plataforma.</p>
         </div>
+        
         <div class="passo">
           <div class="numero">2</div>
           <h3>Publique</h3>
           <p>Cadastre um item que deseja doar ou solicite uma doação.</p>
         </div>
+        
         <div class="passo">
           <div class="numero">3</div>
           <h3>Conecte-se</h3>
           <p>Encontre pessoas interessadas e combine a entrega.</p>
         </div>
+        
         <div class="passo">
           <div class="numero">4</div>
           <h3>Faça a diferença</h3>
@@ -62,6 +84,7 @@
         </div>
       </div>
     </section>
+    
     <section id="area" class="minhas-publicacoes" hidden>
       <div class="boas-vindas-fundo">
         <h1 class="titulo-pagina" id="boas-vindas">Olá!</h1>
@@ -77,17 +100,27 @@
         <h2>💚 Doações disponíveis</h2>
         <div id="doacoes-lista" class="grade-publicacoes"></div>
       </section>
+      
       <section class="secao-publicacoes">
         <h2>💛 Pedidos da comunidade</h2>
         <div id="pedidos-lista" class="grade-publicacoes"></div>
       </section>
     </section>
+    
     <section id="form-area" class="pagina-formulario" hidden>
-      <div class="formulario-conteudo"><span class="painel-subtitulo" id="form-eyebrow"></span>
+      <div class="formulario-conteudo">
+        <span class="painel-subtitulo" id="form-eyebrow"></span>
         <h1 id="form-title"></h1>
-        <form id="publication-form"><input type="hidden" id="pub-id">
-          <div class="campo-form"><label for="item">Nome do item</label><input id="item" maxlength="150" required></div>
-          <div class="campo-form"><label for="categoria">Categoria</label><select id="categoria" required>
+        <form id="publication-form">
+          <input type="hidden" id="pub-id">
+          <div class="campo-form">
+            <label for="item">Nome do item</label>
+            <input id="item" maxlength="150" required>
+          </div>
+          
+          <div class="campo-form">
+            <label for="categoria">Categoria</label>
+            <select id="categoria" required>
               <option value="">Selecione</option>
               <option>Roupas</option>
               <option>Móveis</option>
@@ -95,44 +128,84 @@
               <option>Livros</option>
               <option>Eletrônicos</option>
               <option>Outros</option>
-            </select></div>
-          <div class="campo-form"><label for="descricao">Descrição</label><textarea id="descricao" rows="5"
-              required></textarea></div>
-          <div class="campo-form" id="foto-field"><label for="foto">Foto do item (opcional, até 5 MB)</label><input
-              type="file" id="foto" accept="image/jpeg,image/png,image/webp"></div><button class="btn-principal"
-            type="submit">Publicar</button><button class="btn-secundario" type="button"
-            data-action="home">Cancelar</button>
+            </select>
+          </div>
+          
+          <div class="campo-form">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" rows="5" required></textarea>
+          </div>
+          
+          <div class="campo-form" id="foto-field">
+            <label for="foto">Foto do item (opcional, até 5 MB)</label>
+            <input
+              type="file"
+              id="foto" 
+              accept="image/jpeg,image/png,image/webp"
+            >
+          </div>
+          
+          <button class="btn-principal" type="submit">Publicar</button>
+          <button class="btn-secundario" type="button" data-action="home">Cancelar</button>
         </form>
       </div>
     </section>
+    
     <section id="mine-area" class="minhas-publicacoes" hidden>
       <h1>Minhas publicações</h1>
       <div id="mine-list"></div>
     </section>
+    
     <section id="detalhes-area" hidden>
       <div id="detalhes-conteudo" class="detalhes-container"></div>
     </section>
     <section id="settings-area" class="pagina-formulario" hidden>
       <div class="formulario-conteudo">
         <h1>Configurações da conta</h1>
+        
         <form id="settings-form">
-          <div class="campo-form"><label>Nome completo</label><input id="profile-name" required></div>
-          <div class="campo-form"><label>Telefone</label><input id="profile-phone" required></div><div class="campo-form">
-        <label>E-mail</label><input id="profile-email" type="email" readonly></div><button class="btn-principal">Salvar dados</button>
+          <div class="campo-form">
+            <label>Nome completo</label>
+            <input id="profile-name" required>
+          </div>
+          
+          <div class="campo-form">
+            <label>Telefone</label>
+            <input id="profile-phone" required>
+          </div>
+          
+          <div class="campo-form">
+            <label>E-mail</label>
+            <input id="profile-email" type="email" readonly>
+          </div>
+          
+          <button class="btn-principal">Salvar dados</button>
         </form>
         <hr>
+        
         <h2>Alterar senha</h2>
         <form id="password-form">
           <div class="campo-form">
             <label for="current-password">Senha atual</label>
+            
             <div class="campo-senha">
               <input id="current-password" type="password" required>
-              <button type="button" class="mostrar-senha"
-               data-toggle-password="current-password"
-               aria-label="Mostrar senha">
-               <svg class="icone-olho" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round">
+              <button 
+                type="button" 
+                class="mostrar-senha"
+                data-toggle-password="current-password"
+                aria-label="Mostrar senha"
+              >
+                <svg 
+                  class="icone-olho" 
+                  viewBox="0 0 24 24" 
+                  fill="none"
+                  stroke="currentColor" 
+                  stroke-width="1.8"
+                  stroke-linecap="round" 
+                  stroke-linejoin="round"
+                >
+                  
                 <path d="M3 3l18 18"/>
                 <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
                 <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
@@ -141,16 +214,26 @@
               </button>
              </div>
             </div>
+          
           <div class="campo-form">
             <label for="new-password">Nova senha</label>
             <div class="campo-senha">
              <input id="new-password" type="password" minlength="6" required>
-             <button type="button" class="mostrar-senha"
-              data-toggle-password="new-password"
-              aria-label="Mostrar senha">
-              <svg class="icone-olho" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.8"
-               stroke-linecap="round" stroke-linejoin="round">
+             <button 
+               type="button" 
+               class="mostrar-senha"
+               data-toggle-password="new-password"
+               aria-label="Mostrar senha"
+             >
+               <svg 
+                 class="icone-olho" 
+                 viewBox="0 0 24 24" 
+                 fill="none"
+                 stroke="currentColor" 
+                 stroke-width="1.8"
+                 stroke-linecap="round" 
+                 stroke-linejoin="round"
+               >
                <path d="M3 3l18 18"/>
                <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
                <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
@@ -164,12 +247,21 @@
             <label for="confirm-password">Confirmar nova senha</label>
             <div class="campo-senha">
              <input id="confirm-password" type="password" minlength="6" required>
-             <button type="button" class="mostrar-senha"
-              data-toggle-password="confirm-password"
-              aria-label="Mostrar confirmação de senha">
-              <svg class="icone-olho" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="1.8"
-               stroke-linecap="round" stroke-linejoin="round">
+             <button 
+               type="button" 
+               class="mostrar-senha"
+               data-toggle-password="confirm-password"
+               aria-label="Mostrar confirmação de senha"
+             >
+               <svg 
+                 class="icone-olho" 
+                 viewBox="0 0 24 24" 
+                 fill="none"
+                 stroke="currentColor" 
+                 stroke-width="1.8"
+                 stroke-linecap="round" 
+                 stroke-linejoin="round"
+               >
                <path d="M3 3l18 18"/>
                <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
                <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
@@ -182,20 +274,36 @@
           <button class="btn-principal" type="submit">Alterar senha</button>
         </form>
         <hr>
+        
         <h2>Excluir conta</h2>
         <p>Essa ação é permanente e não poderá ser desfeita.</p>
-        <button class="btn-principal btn-excluir-conta" type="button" data-action="delete-account">
+        <button 
+          class="btn-principal btn-excluir-conta" 
+          type="button" 
+          data-action="delete-account"
+        >
           Excluir minha conta
         </button>
       </div>
     </section>
   </main>
+  
   <div class="modal" id="auth-modal">
-    <div class="modal-conteudo"><button class="modal-fechar" data-action="close-modal" aria-label="Fechar">×</button>
+    <div class="modal-conteudo">
+      <button 
+        class="modal-fechar" 
+        data-action="close-modal" 
+        aria-label="Fechar"
+      >×</button>
+      
       <div id="login-panel">
         <h2>Entrar na sua conta</h2>
         <form id="login-form">
-          <div class="campo-form"><label>E-mail</label><input id="login-email" type="email" required></div>
+          <div class="campo-form">
+            <label>E-mail</label>
+            <input id="login-email" type="email" required>
+          </div>
+          
           <div class="campo-form">
             <label for="login-password">Senha</label>
             <div class="campo-senha">
@@ -204,8 +312,19 @@
                 type="button"
                 class="mostrar-senha"
                 data-toggle-password="login-password"
-                aria-label="Mostrar senha">
-                <svg class="icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                aria-label="Mostrar senha"
+              >
+                
+                <svg 
+                  class="icone-olho" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  stroke-width="1.8" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round"
+                >
+                  
                   <path d="M3 3l18 18"/>
                   <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
                   <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
@@ -228,15 +347,40 @@
       <div id="register-panel" hidden>
         <h2>Criar conta</h2>
         <form id="register-form">
-          <div class="campo-form"><label>Nome completo</label><input id="reg-name" required></div>
-          <div class="campo-form"><label>E-mail</label><input id="reg-email" type="email" required></div>
-          <div class="campo-form"><label>Telefone</label><input id="reg-phone" required></div>
+          <div class="campo-form">
+            <label>Nome completo</label>
+            <input id="reg-name" required>
+          </div>
+          
+          <div class="campo-form">
+            <label>E-mail</label>
+            <input id="reg-email" type="email" required>
+          </div>
+          
+          <div class="campo-form">
+            <label>Telefone</label>
+            <input id="reg-phone" required>
+          </div>
+          
           <div class="campo-form">
             <label for="reg-password">Senha (mínimo 6 caracteres)</label>
             <div class="campo-senha">
               <input id="reg-password" type="password" minlength="6" required>
-              <button type="button" class="mostrar-senha" data-toggle-password="reg-password" aria-label="Mostrar senha">
-                <svg class="icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <button 
+                type="button" 
+                class="mostrar-senha" 
+                data-toggle-password="reg-password" 
+                aria-label="Mostrar senha"
+              >
+                <svg 
+                  class="icone-olho" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  stroke-width="1.8" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round"
+                >
                   <path d="M3 3l18 18"/>
                   <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
                   <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
@@ -250,8 +394,21 @@
             <label for="reg-confirm-password">Confirmar senha</label>
             <div class="campo-senha">
               <input id="reg-confirm-password" type="password" minlength="6" required>
-              <button type="button" class="mostrar-senha" data-toggle-password="reg-confirm-password" aria-label="Mostrar confirmação de senha">
-                <svg class="icone-olho" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <button 
+                type="button" 
+                class="mostrar-senha" 
+                data-toggle-password="reg-confirm-password" 
+                aria-label="Mostrar confirmação de senha"
+              >
+                <svg 
+                  class="icone-olho" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  stroke-width="1.8" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round"
+                >
                   <path d="M3 3l18 18"/>
                   <path d="M10.6 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-4 4.7"/>
                   <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10 10 0 0 0 4-.8"/>
@@ -264,13 +421,18 @@
         </form>
         <p class="cadastro-link">Já tem conta? <a href="#" data-action="login">Entrar</a></p>
       </div>
+      
       <div id="forgot-panel" hidden>
         <h2>Recuperar conta</h2>
         <form id="forgot-form">
-          <div class="campo-form"><label>E-mail cadastrado</label><input id="forgot-email" type="email" required></div>
+          <div class="campo-form">
+            <label>E-mail cadastrado</label>
+            <input id="forgot-email" type="email" required>
+          </div>
           <button class="btn-principal">Enviar link de recuperação</button>
         </form>
       </div>
+      
       <div id="reset-password-panel" hidden>
         <h2>Redefinir senha</h2>
         <p>Digite sua nova senha abaixo.</p>
@@ -303,6 +465,7 @@
       </div>
     </div>
   </div>
+  
   <div id="app-status" aria-live="polite"></div>
   <footer>
     <p>DoaUbiratã · Solidariedade que aproxima.</p>
