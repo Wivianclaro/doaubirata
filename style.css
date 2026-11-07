@@ -15,10 +15,7 @@ body {
     line-height: 1.5;
 }
 
-/* ==============================
-   HEADER
-   ============================== */
-
+/* HEADER */
 header {
     height: 75px;
     background: white;
@@ -64,10 +61,7 @@ nav a:hover {
     gap: 10px;
 }
 
-/* ==============================
-   BOTÕES
-   ============================== */
-
+/* BOTÕES */
 button,
 .btn-principal,
 .btn-secundario,
@@ -121,10 +115,7 @@ button,
     background: #f1faf5;
 }
 
-/* ==============================
-   HERO
-   ============================== */
-
+/* HERO */
 .hero {
     min-height: 560px;
     padding: 80px 7%;
@@ -196,10 +187,7 @@ button,
     color: #68746e;
 }
 
-/* ==============================
-   PESQUISA
-   ============================== */
-
+/* PESQUISA */
 .pesquisa-section {
     padding: 70px 7%;
     background: white;
@@ -267,10 +255,7 @@ button,
     color: #44534c;
 }
 
-/* ==============================
-   SEÇÕES
-   ============================== */
-
+/* SEÇÕES */
 .section {
     padding: 80px 7%;
     max-width: 1250px;
@@ -281,10 +266,7 @@ button,
     margin-bottom: 45px;
 }
 
-/* ==============================
-   CARDS DA PÁGINA INICIAL
-   ============================== */
-
+/* CARDS DA PÁGINA INICIAL */
 .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -368,10 +350,7 @@ button,
     color: #68746e;
 }
 
-/* ==============================
-   COMO FUNCIONA
-   ============================== */
-
+/* COMO FUNCIONA */
 .como {
     padding: 80px 7%;
     background: #eaf7f0;
@@ -415,10 +394,7 @@ button,
     font-size: 14px;
 }
 
-/* ==============================
-   RODAPÉ
-   ============================== */
-
+/* RODAPÉ */
 footer {
     background: #26332d;
     color: white;
@@ -434,10 +410,7 @@ footer p {
     color: #cbd5d0;
 }
 
-/* ==============================
-   MODAIS
-   ============================== */
-
+/* MODAIS */
 .modal {
     display: none;
     position: fixed;
@@ -540,10 +513,7 @@ footer p {
     text-decoration: underline;
 }
 
-/* ==============================
-   ESQUECI MINHA SENHA
-   ============================== */
-
+/* ESQUECI MINHA SENHA */
 .esqueci-senha {
     display: block;
     width: 100%;
@@ -562,10 +532,7 @@ footer p {
     text-decoration: underline;
 }
 
-/* ==============================
-   PAINEL
-   ============================== */
-
+/* PAINEL */
 .painel {
     padding: 70px 7%;
     background: #f8faf9;
@@ -594,10 +561,7 @@ footer p {
     margin-bottom: 30px;
 }
 
-/* ==============================
-   OPÇÕES DO PAINEL
-   ============================== */
-
+/* OPÇÕES DO PAINEL */
 .opcoes-painel {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -637,9 +601,7 @@ footer p {
     line-height: 1.5;
 }
 
-/* ==============================
-   ÁREA DE PESQUISA DO PAINEL
-   ============================== */
+/* ÁREA DE PESQUISA DO PAINEL */
 
 .area-pesquisa {
     background: white;
@@ -649,10 +611,7 @@ footer p {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* ==============================
-   PUBLICAÇÕES
-   ============================== */
-
+/* PUBLICAÇÕES */
 .titulo-publicacoes {
     margin-bottom: 30px;
 }
@@ -757,16 +716,12 @@ footer p {
     color: #68746e;
 }
 
-/* ==============================
-   DETALHES
-   ============================== */
-
+/* DETALHES */
 .detalhes-pagina {
     min-height: calc(100vh - 75px);
     background: #f8faf9;
     padding: 60px 7%;
 }
-
 
 .detalhes-card {
     max-width: 1000px;
@@ -808,10 +763,7 @@ footer p {
     line-height: 1.7;
 }
 
-/* ==============================
-   CONTATO
-   ============================== */
-
+/* CONTATO */
 .contato {
     margin-top: 35px;
     padding: 25px;
@@ -843,10 +795,7 @@ footer p {
     text-decoration: underline;
 }
 
-/* ==============================
-   AÇÕES DO DONO
-   ============================== */
-
+/* AÇÕES DO DONO */
 .acoes-publicacao {
     margin-top: 30px;
     padding-top: 20px;
@@ -860,7 +809,6 @@ footer p {
 }
 
 /* Linha dos 3 botões */
-
 .botoes-acoes {
     display: flex;
     align-items: flex-start;
@@ -930,7 +878,6 @@ footer p {
 }
 
 /* Excluir */
-
 .botoes-acoes .link-excluir {
     color: #dc2626 !important;
 }
@@ -1013,9 +960,7 @@ footer p {
     margin-top: 12px;
 }
 
-/* ==============================
-   RESPONSIVIDADE
-   ============================== */
+/* RESPONSIVIDADE */
 
 @media (max-width: 1000px) {
     .hero {
@@ -1188,7 +1133,6 @@ footer p {
 }
 
 /* CONFIGURAÇÕES DA CONTA */
-
 .pagina-configuracao {
     background: #f8faf9;
     min-height: 100vh;
@@ -1235,7 +1179,6 @@ footer p {
 
 
 /* PÁGINA */
-
 .configuracao-pagina {
     min-height: calc(100vh - 75px);
     padding: 55px 20px 80px;
@@ -1249,7 +1192,6 @@ footer p {
 
 
 /* CABEÇALHO */
-
 .configuracao-cabecalho {
     margin-bottom: 35px;
 }
@@ -1286,7 +1228,6 @@ footer p {
 
 
 /* SEÇÕES */
-
 .configuracao-secao {
     background: #ffffff;
 
@@ -1301,9 +1242,7 @@ footer p {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
 
-
 /* CABEÇALHO DA SEÇÃO */
-
 .configuracao-secao-cabecalho {
     display: flex;
     align-items: center;
@@ -1348,7 +1287,6 @@ footer p {
 
 
 /* FORMULÁRIOS */
-
 .form-configuracao {
     display: flex;
     flex-direction: column;
@@ -1396,9 +1334,7 @@ footer p {
     box-shadow: 0 0 0 3px rgba(22, 128, 92, 0.08);
 }
 
-
 /* BOTÃO */
-
 .configuracao-acoes {
     margin-top: 5px;
 }
@@ -1407,9 +1343,7 @@ footer p {
     min-width: 190px;
 }
 
-
 /* EXCLUSÃO */
-
 .configuracao-excluir {
     border: 1px solid #f1d4d4;
 }
@@ -1452,9 +1386,7 @@ footer p {
     line-height: 1.6;
 }
 
-
 /* BOTÃO EXCLUIR */
-
 .btn-excluir {
     display: inline-flex;
     align-items: center;
@@ -1488,9 +1420,7 @@ footer p {
     color: #b91c1c;
 }
 
-
 /* CONFIGURAÇÕES - CELULAR */
-
 @media (max-width: 700px) {
 
     .header-configuracao {
@@ -1539,7 +1469,6 @@ footer p {
 
 }
 
-
 @media (max-width: 450px) {
 
     .header-configuracao .logo {
@@ -1563,7 +1492,6 @@ footer p {
 }
 
 /* PÁGINAS DE DOAÇÃO E PEDIDO */
-
 .pagina-formulario {
     min-height: calc(100vh - 75px);
     background: #f8faf9;
@@ -1598,7 +1526,6 @@ footer p {
 }
 
 /* FORMULÁRIO */
-
 .formulario-conteudo form {
     display: flex;
     flex-direction: column;
@@ -1651,7 +1578,6 @@ footer p {
 }
 
 /* CELULAR */
-
 @media (max-width: 700px) {
 
     .pagina-formulario {
@@ -1697,10 +1623,7 @@ footer p {
     display: block;
 }
 
-/* ==========================================
-   CORREÇÃO DO LAYOUT DAS AÇÕES DA PUBLICAÇÃO
-   ========================================== */
-
+/* CORREÇÃO DO LAYOUT DAS AÇÕES DA PUBLICAÇÃO */
 .acoes-publicacao {
     width: 100%;
     margin-top: 30px;
@@ -1847,7 +1770,6 @@ footer p {
 }
 
 /* CORREÇÃO DEFINITIVA DO LAYOUT EM DETALHES.PHP */
-
 .detalhes-card .botoes-acoes {
     display: flex !important;
     flex-direction: column !important;
@@ -1910,7 +1832,6 @@ footer p {
     box-sizing: border-box !important;
 }
 
-/* Mantém o tamanho dos botões organizado */
 .detalhes-card .botoes-acoes>form.acao-status button,
 .detalhes-card .botoes-acoes>form.acao-excluir button {
     width: 220px !important;
@@ -1919,10 +1840,7 @@ footer p {
     box-sizing: border-box !important;
 }
 
-/* =====================================
-   CABEÇALHO EXCLUSIVO DA ÁREA LOGADA
-   ===================================== */
-
+/* CABEÇALHO DA ÁREA LOGADA */
 .header-logado {
     display: flex;
     flex-direction: row;
@@ -2013,7 +1931,6 @@ footer p {
     }
 }
 
-/* No celular, a pesquisa fica abaixo do logo */
 @media (max-width: 600px) {
     .header-logado {
         height: auto;
@@ -2566,10 +2483,7 @@ body .voltar-container a.btn-login {
     }
 }
 
-/* =========================================
-   BOTÕES DA PÁGINA DE DETALHES
-   ========================================= */
-
+/* BOTÕES DA PÁGINA DE DETALHES */
 .detalhes-card .botoes-acoes {
     display: flex !important;
     flex-direction: column !important;
@@ -2666,7 +2580,7 @@ body .voltar-container a.btn-login {
     text-decoration: none;
 }
 
-/* Igualar o tamanho dos botões Voltar e Sair */
+/* Iguala o tamanho dos botões Voltar e Sair */
 body.pagina-configuracao .header-configuracao .acoes-header a.btn-voltar,
 body.pagina-configuracao .header-configuracao .acoes-header a.btn-login {
     display: inline-flex !important;
@@ -2770,10 +2684,7 @@ body.pagina-configuracao .header-configuracao .acoes-header {
     font-weight: 600;
 }
 
-/* =====================================
-   PÁGINA DE RECUPERAÇÃO DE SENHA
-===================================== */
-
+/* PÁGINA DE RECUPERAÇÃO DE SENHA */
 body.pagina-recuperacao {
     margin: 0;
     min-height: 100vh;
@@ -2783,7 +2694,6 @@ body.pagina-recuperacao {
 }
 
 /* Cabeçalho */
-
 .cabecalho-recuperacao {
     width: 100%;
     min-height: 86px;
@@ -2829,7 +2739,6 @@ body.pagina-recuperacao {
 }
 
 /* Área principal */
-
 .recuperacao-container {
     min-height: calc(100vh - 86px);
     padding: 55px 20px;
@@ -2840,7 +2749,6 @@ body.pagina-recuperacao {
 }
 
 /* Cartão branco */
-
 .recuperacao-card {
     width: 100%;
     max-width: 780px;
@@ -2854,7 +2762,6 @@ body.pagina-recuperacao {
 }
 
 /* Títulos e textos */
-
 .recuperacao-subtitulo {
     display: block;
     margin-bottom: 12px;
@@ -2879,7 +2786,6 @@ body.pagina-recuperacao {
 }
 
 /* Formulário */
-
 .form-recuperacao {
     width: 100%;
     text-align: left;
@@ -2927,7 +2833,6 @@ body.pagina-recuperacao {
 }
 
 /* Botão continuar */
-
 .btn-continuar-recuperacao {
     display: block;
     width: 100%;
@@ -2954,7 +2859,6 @@ body.pagina-recuperacao {
 }
 
 /* Mensagem de erro */
-
 .recuperacao-erro {
     margin: 0 0 24px;
     padding: 14px 16px;
@@ -2968,7 +2872,6 @@ body.pagina-recuperacao {
 }
 
 /* Link de retorno */
-
 .recuperacao-voltar-inicio {
     margin: 32px 0 0;
     text-align: center;
@@ -2987,7 +2890,6 @@ body.pagina-recuperacao {
 }
 
 /* Adaptação para celulares */
-
 @media (max-width: 600px) {
 
     .cabecalho-recuperacao {
@@ -3074,10 +2976,7 @@ body.pagina-recuperacao {
 
 }
 
-/* ==========================================
-   PÁGINA CRIAR NOVA SENHA
-========================================== */
-
+/* PÁGINA CRIAR NOVA SENHA */
 body.pagina-nova-senha {
     margin: 0;
     min-height: 100vh;
@@ -3087,7 +2986,6 @@ body.pagina-nova-senha {
 }
 
 /* Cabeçalho */
-
 .cabecalho-nova-senha {
     min-height: 86px;
     padding: 10px 4%;
@@ -3135,7 +3033,6 @@ body.pagina-nova-senha {
 }
 
 /* Área principal */
-
 .nova-senha-container {
     min-height: calc(100vh - 86px);
     padding: 45px 20px;
@@ -3146,7 +3043,6 @@ body.pagina-nova-senha {
 }
 
 /* Cartão */
-
 .nova-senha-card {
     width: 100%;
     max-width: 750px;
@@ -3160,7 +3056,6 @@ body.pagina-nova-senha {
 }
 
 /* Ícone decorativo */
-
 .nova-senha-icone {
     width: 52px;
     height: 52px;
@@ -3175,7 +3070,6 @@ body.pagina-nova-senha {
 }
 
 /* Títulos */
-
 .nova-senha-subtitulo {
     display: block;
     margin-bottom: 12px;
@@ -3200,7 +3094,6 @@ body.pagina-nova-senha {
 }
 
 /* Formulário */
-
 .form-nova-senha {
     width: 100%;
     text-align: left;
@@ -3219,7 +3112,6 @@ body.pagina-nova-senha {
 }
 
 /* Campo com cadeado e botão de visualização */
-
 .senha-input-wrapper {
     position: relative;
     display: flex;
@@ -3272,7 +3164,6 @@ body.pagina-nova-senha {
 }
 
 /* Botão mostrar/ocultar */
-
 .botao-mostrar-senha {
     position: absolute;
     right: 12px;
@@ -3305,7 +3196,6 @@ body.pagina-nova-senha {
 }
 
 /* Dica de senha */
-
 .dica-nova-senha {
     margin: -10px 0 25px;
     color: #71838a;
@@ -3314,7 +3204,6 @@ body.pagina-nova-senha {
 }
 
 /* Botão salvar */
-
 .btn-salvar-nova-senha {
     display: block;
     width: 100%;
@@ -3340,7 +3229,6 @@ body.pagina-nova-senha {
 }
 
 /* Link de retorno */
-
 .link-inicio-nova-senha {
     margin: 30px 0 0;
     text-align: center;
@@ -3359,7 +3247,6 @@ body.pagina-nova-senha {
 }
 
 /* Celulares e telas menores */
-
 @media (max-width: 600px) {
 
     .cabecalho-nova-senha {
@@ -3466,10 +3353,7 @@ body.pagina-nova-senha {
 
 }
 
-/* ==========================================
-   CONFIRMAÇÃO DE SENHA ALTERADA
-========================================== */
-
+/* CONFIRMAÇÃO DE SENHA ALTERADA */
 body.pagina-sucesso-senha {
     margin: 0;
     min-height: 100vh;
@@ -3618,7 +3502,6 @@ body.pagina-sucesso-senha {
 }
 
 /* Responsividade */
-
 @media (max-width: 600px) {
 
     .cabecalho-sucesso-senha {
@@ -3684,10 +3567,7 @@ body.pagina-sucesso-senha {
 
 }
 
-/* ========================================
-   TELA DE SUCESSO - DOAUBIRATÃ
-======================================== */
-
+/* TELA DE SUCESSO - DOAUBIRATÃ */
 body.pagina-sucesso-doacao {
     margin: 0;
     min-height: 100vh;
@@ -3811,7 +3691,6 @@ body.pagina-sucesso-doacao {
 }
 
 /* Ajustes para celulares */
-
 @media (max-width: 600px) {
     .cabecalho-sucesso-doacao {
         height: 75px;
@@ -4134,10 +4013,7 @@ body:has(#mine-area:not([hidden])) #nav-auth button[data-action="logout"] {
 }
 
 
-/* =================================
-   MINHAS PUBLICAÇÕES - NOVO DESIGN
-================================= */
-
+/* MINHAS PUBLICAÇÕES - NOVO DESIGN */
 #mine-area {
     padding: 35px;
     background: #ffffff;
@@ -4304,8 +4180,7 @@ body:has(#settings-area:not([hidden])) #btn-voltar-mine {
     background-color: #bb2d3b !important;
 }
 
-/* ===== Cartões de doações e pedidos ===== */
-
+/* Cartões de doações e pedidos */
 #doacoes-lista,
 #pedidos-lista {
     display: grid;
@@ -4377,8 +4252,7 @@ body:has(#settings-area:not([hidden])) #btn-voltar-mine {
     }
 }
 
-/* ===== Acabamento dos cartões de publicações ===== */
-
+/* Acabamento dos cartões de publicações */
 .card-publicacao {
     overflow: hidden;
     border: 1px solid #e2ebe5;
@@ -4447,8 +4321,7 @@ body:has(#settings-area:not([hidden])) #btn-voltar-mine {
     color: #0d5035;
 }
 
-/* ===== Página de detalhes da publicação ===== */
-
+/* Página de detalhes da publicação */
 .detalhes-container {
     max-width: 800px;
     margin: 24px auto;
