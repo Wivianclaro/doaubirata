@@ -127,7 +127,6 @@
             window.SUPABASE_ANON_KEY
         );
 
-        // Registrar primeiro os eventos de autenticação.
         sb.auth.onAuthStateChange((event, session) => {
             user = session?.user || null;
 
@@ -148,7 +147,6 @@
             }
         });
 
-        // Consultar a sessão depois de registrar os eventos.
         const { data: { session } } = await sb.auth.getSession();
 
         user = session?.user || null;
@@ -302,166 +300,166 @@
             '<p>Nenhum pedido aberto no momento.</p>';
     }
 
-function card(d, t) {
-    const foto =
-        t === 'doacao' && d.foto
-            ? `<img class="imagem-publicacao" src="${escapeHtml(d.foto)}" alt="">`
+    function card(d, t) {
+        const foto =
+            t === 'doacao' && d.foto
+                ? `<img class="imagem-publicacao" src="${escapeHtml(d.foto)}" alt="">`
+                : '';
+
+        return `
+            <article class="card-publicacao">
+                ${foto}
+
+                <div class="conteudo-card">
+                    <h3>${escapeHtml(d.item)}</h3>
+
+                    <span class="categoria-publicacao">
+                        Categoria: ${escapeHtml(d.categoria)}
+                    </span>
+
+                    <p>${escapeHtml(d.descricao)}</p>
+
+                    <p>
+                        <span class="status-publicacao">
+                            ${t === 'doacao'
+                                ? (d.status === 'finalizada' ? 'Doado' : 'Disponível')
+                                : (d.status === 'atendido' ? 'Atendido' : 'Pedido aberto')}
+                        </span>
+                    </p>
+
+                    <div class="rodape-card">
+                        <small class="autor-publicacao">
+                            Publicado por ${escapeHtml(d.usuarios?.nome || 'usuário')}
+                        </small>
+
+                        <button
+                            type="button"
+                            class="link-detalhes"
+                            data-details="${t}:${d.id}">
+                            Ver detalhes →
+                        </button>
+                    </div>
+                </div>
+            </article>
+        `;
+    }
+
+    async function carregarNomesPublicacoes(publicacoes) {
+        const ids = [...new Set(
+            publicacoes.map(p => p.usuario_id).filter(Boolean)
+        )];
+
+        if (!ids.length) return publicacoes;
+
+        const { data, error } = await sb.rpc('buscar_nomes_usuarios', {
+            ids_usuarios: ids
+        });
+
+        if (error) {
+            console.error('Erro ao buscar nomes:', error);
+            return publicacoes;
+        }
+
+        const nomes = Object.fromEntries(
+            (data || []).map(u => [u.usuario_id, u.nome])
+        );
+
+        return publicacoes.map(p => ({
+            ...p,
+            usuarios: {
+                ...(p.usuarios || {}),
+                nome: nomes[p.usuario_id] || 'usuário'
+            }
+        }));
+    }    
+
+    async function openDetails(type, id) {
+        const tabela = type === 'doacao' ? 'doacoes' : 'pedidos';
+
+        const { data, error } = await sb
+            .from(tabela)
+            .select('*')
+            .eq('id', id)
+            .single();
+
+        if (error || !data) {
+            alert('Não foi possível carregar os detalhes desta publicação.');
+            console.error(error);
+            return;
+        }
+
+        const eDoacao = type === 'doacao';
+        const minhaPublicacao = user && data.usuario_id === user.id;
+
+        const foto = eDoacao && data.foto
+            ? `<img class="detalhes-foto" src="${escapeHtml(data.foto)}" alt="${escapeHtml(data.item)}">`
             : '';
 
-    return `
-        <article class="card-publicacao">
+        const { data: contato, error: erroContato } = await sb
+            .rpc('buscar_contato_usuario', {
+            usuario_id_busca: data.usuario_id
+            })
+            .maybeSingle();
+
+        if (erroContato) {
+            console.error('Erro ao buscar contato:', erroContato);
+        }
+
+        const nome = contato?.nome || 'Usuário';
+        const telefone = contato?.telefone || 'Telefone não informado';
+    
+        const publicacaoConcluida = eDoacao
+        ? data.status === 'finalizada'
+        : data.status === 'atendido';
+
+        $('detalhes-conteudo').innerHTML = `
+
             ${foto}
 
-            <div class="conteudo-card">
-                <h3>${escapeHtml(d.item)}</h3>
+            <h1>${escapeHtml(data.item)}</h1>
 
-                <span class="categoria-publicacao">
-                    Categoria: ${escapeHtml(d.categoria)}
-                </span>
+            <span class="categoria-publicacao">
+                Categoria: ${escapeHtml(data.categoria || 'Não informada')}
+            </span>
 
-                <p>${escapeHtml(d.descricao)}</p>
+            <h2>${eDoacao ? 'Sobre esta doação' : 'Sobre este pedido'}</h2>
+            <p>${escapeHtml(data.descricao || 'Nenhuma descrição informada.')}</p>
 
-                <p>
-                    <span class="status-publicacao">
-                        ${t === 'doacao'
-                            ? (d.status === 'finalizada' ? 'Doado' : 'Disponível')
-                            : (d.status === 'atendido' ? 'Atendido' : 'Pedido aberto')}
-                    </span>
-                </p>
-
-                <div class="rodape-card">
-                    <small class="autor-publicacao">
-                        Publicado por ${escapeHtml(d.usuarios?.nome || 'usuário')}
-                    </small>
-
-                    <button
-                        type="button"
-                        class="link-detalhes"
-                        data-details="${t}:${d.id}">
-                        Ver detalhes →
-                    </button>
-                </div>
-            </div>
-        </article>
-    `;
-}
-
-async function carregarNomesPublicacoes(publicacoes) {
-    const ids = [...new Set(
-        publicacoes.map(p => p.usuario_id).filter(Boolean)
-    )];
-
-    if (!ids.length) return publicacoes;
-
-    const { data, error } = await sb.rpc('buscar_nomes_usuarios', {
-        ids_usuarios: ids
-    });
-
-    if (error) {
-        console.error('Erro ao buscar nomes:', error);
-        return publicacoes;
-    }
-
-    const nomes = Object.fromEntries(
-        (data || []).map(u => [u.usuario_id, u.nome])
-    );
-
-    return publicacoes.map(p => ({
-        ...p,
-        usuarios: {
-            ...(p.usuarios || {}),
-            nome: nomes[p.usuario_id] || 'usuário'
-        }
-    }));
-}    
-
-async function openDetails(type, id) {
-    const tabela = type === 'doacao' ? 'doacoes' : 'pedidos';
-
-    const { data, error } = await sb
-        .from(tabela)
-        .select('*')
-        .eq('id', id)
-        .single();
-
-    if (error || !data) {
-        alert('Não foi possível carregar os detalhes desta publicação.');
-        console.error(error);
-        return;
-    }
-
-    const eDoacao = type === 'doacao';
-    const minhaPublicacao = user && data.usuario_id === user.id;
-
-    const foto = eDoacao && data.foto
-        ? `<img class="detalhes-foto" src="${escapeHtml(data.foto)}" alt="${escapeHtml(data.item)}">`
-        : '';
-
-    const { data: contato, error: erroContato } = await sb
-        .rpc('buscar_contato_usuario', {
-        usuario_id_busca: data.usuario_id
-        })
-        .maybeSingle();
-
-    if (erroContato) {
-        console.error('Erro ao buscar contato:', erroContato);
-    }
-
-    const nome = contato?.nome || 'Usuário';
-    const telefone = contato?.telefone || 'Telefone não informado';
-    
-    const publicacaoConcluida = eDoacao
-    ? data.status === 'finalizada'
-    : data.status === 'atendido';
-
-    $('detalhes-conteudo').innerHTML = `
-
-        ${foto}
-
-        <h1>${escapeHtml(data.item)}</h1>
-
-        <span class="categoria-publicacao">
-            Categoria: ${escapeHtml(data.categoria || 'Não informada')}
-        </span>
-
-        <h2>${eDoacao ? 'Sobre esta doação' : 'Sobre este pedido'}</h2>
-        <p>${escapeHtml(data.descricao || 'Nenhuma descrição informada.')}</p>
-
-        <section class="detalhes-contato">
-            <h2>Contato de quem publicou</h2>
-            <p><strong>Nome:</strong> ${escapeHtml(nome)}</p>
-            <p><strong>Telefone:</strong> ${escapeHtml(telefone)}</p>
-        </section>
-
-        ${minhaPublicacao ? `
-            <section class="detalhes-acoes">
-                <h2>Gerenciar publicação</h2>
-
-                <button type="button" class="botao-card botao-editar"
-                    data-edit="${type}:${data.id}">
-                    Editar publicação
-                </button>
-
-                ${!publicacaoConcluida ? `
-                    <button type="button" class="botao-card"
-                        data-finish="${type}:${data.id}">
-                        ${eDoacao ? 'Marcar como doado' : 'Marcar como atendido'}
-                    </button>
-                ` : ''}
-
-                <button type="button" class="botao-card botao-excluir"
-                    data-delete="${type}:${data.id}">
-                    Excluir publicação
-                </button>
+            <section class="detalhes-contato">
+               <h2>Contato de quem publicou</h2>
+               <p><strong>Nome:</strong> ${escapeHtml(nome)}</p>
+               <p><strong>Telefone:</strong> ${escapeHtml(telefone)}</p>
             </section>
-        ` : ''}
-    `;
 
-    show('detalhes-area', {
-        type,
-        idPublicacao: id
-    });
-}
+            ${minhaPublicacao ? `
+                <section class="detalhes-acoes">
+                    <h2>Gerenciar publicação</h2>
+
+                    <button type="button" class="botao-card botao-editar"
+                        data-edit="${type}:${data.id}">
+                        Editar publicação
+                    </button>
+
+                    ${!publicacaoConcluida ? `
+                        <button type="button" class="botao-card"
+                            data-finish="${type}:${data.id}">
+                            ${eDoacao ? 'Marcar como doado' : 'Marcar como atendido'}
+                        </button>
+                    ` : ''}
+
+                    <button type="button" class="botao-card botao-excluir"
+                        data-delete="${type}:${data.id}">
+                        Excluir publicação
+                    </button>
+                </section>
+            ` : ''}
+        `;
+
+        show('detalhes-area', {
+            type,
+            idPublicacao: id
+        });
+    }
     
     function openForm(type, row = null) {
         formType = type;
